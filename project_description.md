@@ -1,6 +1,6 @@
 # Project Description: Collaborative To-Do List Web App
 
-The goal is to create a web application that allows users to manage a shared to-do list. The app should enable adding, viewing, updating, and deleting tasks, with the data persisting across sessions. The project must be managed using Git for version control and Docker for containerization, emphasizing collaboration and modern development practices.
+The goal is to create a web application that allows users to manage a shared to-do list. The app should enable adding, viewing, updating, and deleting tasks, with the data persisting across sessions. The project must be managed using Git for version control and Docker for containerization.
 
 example to take inspiration from:
 
@@ -48,7 +48,7 @@ This project requires implementing a multi-component application with:
 
 - **Git Usage**
   - The project is stored in a single Git repository.
-  - Each intern creates at least one branch for their contributions.
+  - Each digispec creates at least one branch for their contributions.
   - Changes are merged into a main branch via pull requests or similar workflow.
 
 - **Docker Usage**
