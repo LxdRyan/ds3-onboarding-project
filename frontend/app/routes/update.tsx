@@ -22,8 +22,12 @@ const UpdateTask: React.FC = () => {
                     placeholder="Update your task"
                     style={{ width: '100%', padding: '10px', marginBottom: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
                 />
-                <button onClick={handleUpdate} style={{ width: '100%', padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#007BFF', color: 'white', cursor: 'pointer' }}>
+                <button onClick={handleUpdate} style={{ width: '100%', padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#007BFF', color: 'white', cursor: 'pointer', marginBottom: '10px' }}>
                     Update
+                </button>
+                <span style={{ display: 'block', textAlign: 'center', marginBottom: '10px' }}>or</span>
+                <button onClick={() => navigate('/')} style={{ width: '100%', padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#6c757d', color: 'white', cursor: 'pointer' }}>
+                    Back to Home
                 </button>
             </div>
         </body>

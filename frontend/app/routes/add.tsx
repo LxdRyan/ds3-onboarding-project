@@ -28,6 +28,10 @@ const AddTask: React.FC = () => {
         navigate('/');
     };
 
+    const handleBack = () => {
+        navigate('/');
+    };
+
     return (
         <div className="container">
             <h1>Add New Task</h1>
@@ -73,6 +77,7 @@ const AddTask: React.FC = () => {
                         value={status}
                         onChange={(e) => setStatus(e.target.value)}
                         required
+                        style={{ outline: '1px solid #000' }}
                     >
                         <option value="">Select Status</option>
                         <option value="Pending">Not Started</option>
@@ -86,6 +91,7 @@ const AddTask: React.FC = () => {
                         value={priority}
                         onChange={(e) => setPriority(e.target.value)}
                         required
+                        style={{ outline: '1px solid #000' }}
                     >
                         <option value="">Select Priority</option>
                         <option value="Low">Low</option>
@@ -93,7 +99,10 @@ const AddTask: React.FC = () => {
                         <option value="High">High</option>
                     </select>
                 </div>
+                
                 <button type="submit">Add Task</button>
+                <span style={{ margin: '0 10px' }}></span>
+                <button type="button" onClick={handleBack}>Back</button>
             </form>
         </div>
     );

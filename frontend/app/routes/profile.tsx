@@ -5,7 +5,7 @@ const Profile: React.FC = () => {
     const [username] = useState('JohnDoe');
     const [profilePicture, setProfilePicture] = useState('default-profile-pic.jpg');
     const [newProfilePicture, setNewProfilePicture] = useState<string | null>(null);
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const handleProfilePictureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
@@ -22,8 +22,12 @@ const Profile: React.FC = () => {
         if (newProfilePicture) {
             setProfilePicture(newProfilePicture);
             alert('Profile picture updated!');
-            history('/');
+            navigate('/');
         }
+    };
+
+    const handleBackClick = () => {
+        navigate('/');
     };
 
     return (
@@ -36,6 +40,7 @@ const Profile: React.FC = () => {
                 {newProfilePicture && (
                     <button onClick={handleConfirmChange} style={styles.button}>Confirm Change</button>
                 )}
+                <button onClick={handleBackClick} style={styles.backButton}>Back to Home</button>
             </div>
         </div>
     );
@@ -78,6 +83,15 @@ const styles = {
     button: {
         padding: '10px 20px',
         backgroundColor: '#007BFF',
+        color: 'white',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        marginBottom: '10px',
+    },
+    backButton: {
+        padding: '10px 20px',
+        backgroundColor: '#6c757d',
         color: 'white',
         border: 'none',
         borderRadius: '5px',
