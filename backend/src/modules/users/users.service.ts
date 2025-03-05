@@ -39,4 +39,14 @@ export class UsersService {
 
     return this.userRepository.save(user);
   }
+
+  async testDatabaseConnection(): Promise<string> {
+    try {
+      await this.userRepository.query('SELECT 1');
+      return 'database connected';
+    } catch (error) {
+      console.error('database connection error:', error);
+      return 'database connection failed';
+    }
+  }
 }

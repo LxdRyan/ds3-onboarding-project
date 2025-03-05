@@ -19,4 +19,9 @@ export class UsersController {
   async createUser(@Body() createUserDto: CreateUserDTO) {
     return await this.usersService.createUser(createUserDto);
   }
+
+  @Get('test-db')
+  async testDBConnection() {
+    return this.usersService.testDatabaseConnection();
+  }
 }

@@ -14,16 +14,30 @@ export class TasksService {
   ) {}
 
   async createTask(userId: number, taskData: Partial<Task>): Promise<Task> {
-    const user = await this.userRepository.findOne({ where: { id: userId } });
-    if (!user) {
-      throw new Error('user not found');
-    }
+    try {
+      const user = await this.userRepository.findOne({ where: { id: userId } });
+      if (!user) {
+        throw new Error('user not found');
+      }
 
-    const task = this.taskRepository.create({ ...taskData, creator: user });
-    return this.taskRepository.save(task);
+      const task = this.taskRepository.create({ ...taskData, creator: user });
+      return this.taskRepository.save(task);
+    } catch (error) {
+      if (error.code === 'ECONNREFUSED') {
+        throw new Error('database connection refused');
+      }
+      throw error;
+    }
   }
 
   async getTasks(): Promise<Task[]> {
-    return this.taskRepository.find({ relations: ['creator'] });
+    try {
+      return this.taskRepository.find({ relations: ['creator'] });
+    } catch (error) {
+      if (error.code === 'ECONNREFUSED') {
+        throw new Error('database connection refused');
+      }
+      throw error;
+    }
   }
 }

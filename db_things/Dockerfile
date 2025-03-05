@@ -1,4 +1,4 @@
-FROM postgres
+FROM postgres:latest
 
 ARG POSTGRES_USER
 ARG POSTGRES_PASSWORD
