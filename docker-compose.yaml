@@ -36,15 +36,20 @@ services:
       - "3000:3000"
 
   db:
-    build:
-      context: ./db_things
-      dockerfile: Dockerfile
-    container_name: todo_db
-    restart: always
+    image: postgres
+    build: 
+      context: .
+      dockerfile: /db_things/database.Dockerfile
+      args:
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+        - POSTGRES_DB=${POSTGRES_DB}
+    env_file:
+      - db.env
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    expose:
+      - "5432"
 
 volumes:
   postgres_data:
