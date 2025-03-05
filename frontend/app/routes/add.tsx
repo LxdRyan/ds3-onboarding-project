@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './AddTask.css'; // Import the CSS file
 
 const AddTask: React.FC = () => {
     const [taskName, setTaskName] = useState('');
@@ -7,6 +9,8 @@ const AddTask: React.FC = () => {
     const [dueDate, setDueDate] = useState('');
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -20,13 +24,15 @@ const AddTask: React.FC = () => {
         };
         console.log('New Task:', newTask);
         // Add logic to save the task
+        alert('Task added');
+        navigate('/');
     };
 
     return (
-        <div>
+        <div className="container">
             <h1>Add New Task</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form className='task-form' onSubmit={handleSubmit}>
+                <div className="form-group">
                     <label>Task Name:</label>
                     <input
                         type="text"
@@ -35,7 +41,7 @@ const AddTask: React.FC = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Task Contents:</label>
                     <textarea
                         value={taskContents}
@@ -43,7 +49,7 @@ const AddTask: React.FC = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Creator:</label>
                     <input
                         type="text"
@@ -52,7 +58,7 @@ const AddTask: React.FC = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Due Date:</label>
                     <input
                         type="date"
@@ -61,7 +67,7 @@ const AddTask: React.FC = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Status:</label>
                     <select
                         value={status}
@@ -74,7 +80,7 @@ const AddTask: React.FC = () => {
                         <option value="Completed">Completed</option>
                     </select>
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Priority:</label>
                     <select
                         value={priority}
