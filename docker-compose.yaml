@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"  # frontend
+      - "5000:5000"  # backend
+    volumes:
+      - .:/app
+      - /app/frontend/node_modules
+      - /app/backend/node_modules
+    command: ["sh", "-c", "serve -s frontend/build -l 3000 & npm --prefix backend run start"]
+  database:
+    image: postgres
+    build: 
+      context: .
+      dockerfile: /db_things/db.Dockerfile
+      args:
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=
+        - POSTGRES_DB=${POSTGRES_DB}
+    env_file:
+      - /db_things/.env
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
