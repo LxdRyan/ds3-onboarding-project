@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany } from 'typeorm';
 import { Task } from '../../tasks/entities/task.entity';
 import { randomBytes, scryptSync } from 'crypto';
 
@@ -22,6 +22,9 @@ export class User {
     this.password = salt + scryptSync(this.password, salt, 64).toString('hex'); // hash password with salt
   }
 
+  @Column({ type: 'bytea', nullable: true })
+  profilePicture: Buffer | null;
+
   @OneToMany(() => Task, (task) => task.creator)
-  tasks: Task[]
+  tasks: Task[];
 }
