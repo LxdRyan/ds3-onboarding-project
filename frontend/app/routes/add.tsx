@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './AddTask.css'; // Import the CSS file
 
 const AddTask: React.FC = () => {
     const [taskName, setTaskName] = useState('');
@@ -7,6 +9,8 @@ const AddTask: React.FC = () => {
     const [dueDate, setDueDate] = useState('');
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -20,13 +24,19 @@ const AddTask: React.FC = () => {
         };
         console.log('New Task:', newTask);
         // Add logic to save the task
+        alert('Task added');
+        navigate('/');
+    };
+
+    const handleBack = () => {
+        navigate('/');
     };
 
     return (
-        <div>
+        <div className="container">
             <h1>Add New Task</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form className='task-form' onSubmit={handleSubmit}>
+                <div className="form-group">
                     <label>Task Name:</label>
                     <input
                         type="text"
@@ -35,7 +45,7 @@ const AddTask: React.FC = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Task Contents:</label>
                     <textarea
                         value={taskContents}
@@ -43,7 +53,7 @@ const AddTask: React.FC = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Creator:</label>
                     <input
                         type="text"
@@ -52,7 +62,7 @@ const AddTask: React.FC = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Due Date:</label>
                     <input
                         type="date"
@@ -61,12 +71,13 @@ const AddTask: React.FC = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Status:</label>
                     <select
                         value={status}
                         onChange={(e) => setStatus(e.target.value)}
                         required
+                        style={{ outline: '1px solid #000' }}
                     >
                         <option value="">Select Status</option>
                         <option value="Pending">Not Started</option>
@@ -74,12 +85,13 @@ const AddTask: React.FC = () => {
                         <option value="Completed">Completed</option>
                     </select>
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Priority:</label>
                     <select
                         value={priority}
                         onChange={(e) => setPriority(e.target.value)}
                         required
+                        style={{ outline: '1px solid #000' }}
                     >
                         <option value="">Select Priority</option>
                         <option value="Low">Low</option>
@@ -87,7 +99,10 @@ const AddTask: React.FC = () => {
                         <option value="High">High</option>
                     </select>
                 </div>
+                
                 <button type="submit">Add Task</button>
+                <span style={{ margin: '0 10px' }}></span>
+                <button type="button" onClick={handleBack}>Back</button>
             </form>
         </div>
     );

@@ -13,7 +13,7 @@ export class Task {
   contents: string;
 
   @ManyToOne(() => User, (user) => user.tasks, { eager: true })
-  creator: number;
+  creator: User;
 
   @Column()
   dueDate: Date;

@@ -34,20 +34,29 @@ export default function Home() {
     setDropdownOpen(false);
   };
 
+  const handleAddTask = () => {
+    navigate("/add");
+  };
+
   return (
     <div className="container">
-      <div className="header">
+      <div className="navbar">
         <h1>Task List</h1>
-        <div className="dropdown">
-          <button onClick={toggleDropdown} className="dropdown-button">
-            Menu
+        <div className="navbar-right">
+          <button onClick={handleAddTask} className="add-task-button">
+            Add Task
           </button>
-          {dropdownOpen && (
-            <ul className="dropdown-menu">
-              <li onClick={() => handleNavigation("/profile")}>Profile</li>
-              <li onClick={handleSignOut}>Sign Out</li>
-            </ul>
-          )}
+          <div className="dropdown">
+            <button onClick={toggleDropdown} className="dropdown-button">
+              Menu
+            </button>
+              {dropdownOpen && (
+                <ul className="dropdown-menu">
+                  <li onClick={() => handleNavigation("/profile")}>Profile</li>
+                  <li onClick={handleSignOut}>Sign Out</li>
+                </ul>
+              )}  
+          </div>
         </div>
       </div>
       <ul>

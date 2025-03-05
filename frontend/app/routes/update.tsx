@@ -12,16 +12,25 @@ const UpdateTask: React.FC = () => {
     };
 
     return (
-        <div>
-            <h1>Update Task</h1>
-            <input
-                type="text"
-                value={task}
-                onChange={(e) => setTask(e.target.value)}
-                placeholder="Update your task"
-            />
-            <button onClick={handleUpdate}>Update</button>
-        </div>
+        <body style={{height: '100vh', backgroundColor: '#f0f2f5'}}>
+            <div style={{ backgroundColor: 'white', color: 'black', padding: '20px', borderRadius: '8px', maxWidth: '400px', margin: 'auto', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                <h1 style={{ textAlign: 'center' }}>Update Task</h1>
+                <input
+                    type="text"
+                    value={task}
+                    onChange={(e) => setTask(e.target.value)}
+                    placeholder="Update your task"
+                    style={{ width: '100%', padding: '10px', marginBottom: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
+                />
+                <button onClick={handleUpdate} style={{ width: '100%', padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#007BFF', color: 'white', cursor: 'pointer', marginBottom: '10px' }}>
+                    Update
+                </button>
+                <span style={{ display: 'block', textAlign: 'center', marginBottom: '10px' }}>or</span>
+                <button onClick={() => navigate('/')} style={{ width: '100%', padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#6c757d', color: 'white', cursor: 'pointer' }}>
+                    Back to Home
+                </button>
+            </div>
+        </body>
     );
 };
 
