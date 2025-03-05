@@ -1,11 +1,50 @@
+# services:
+#   app:
+#     build: .
+#     ports:
+#       - "3000:3000"  # frontend
+#       - "5000:5000"  # backend
+#     volumes:
+#       - .:/app
+#       - /app/frontend/node_modules
+#       - /app/backend/node_modules
+#     command: ["sh", "-c", "serve -s frontend/build -l 3000 & npm --prefix backend run start"]
+
 services:
-  app:
-    build: .
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: todo_backend
     ports:
-      - "3000:3000"  # frontend
-      - "5000:5000"  # backend
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: myuser
+      DB_PASS: mypassword
+      DB_NAME: mydatabase
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: todo_frontend
+    ports:
+      - "3000:3000"
+
+  db:
+    build:
+      context: ./db_things
+      dockerfile: Dockerfile
+    container_name: todo_db
+    restart: always
+    ports:
+      - "5432:5432"
     volumes:
-      - .:/app
-      - /app/frontend/node_modules
-      - /app/backend/node_modules
-    command: ["sh", "-c", "serve -s frontend/build -l 3000 & npm --prefix backend run start"]
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
