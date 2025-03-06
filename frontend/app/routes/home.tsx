@@ -1,7 +1,10 @@
 import type { Route } from "./+types/home";
 import { useNavigate } from "react-router-dom";
 import "./home.css"; // Import the CSS file
-import { useState } from "react";
+import React, { useState } from "react";
+import {
+  Container,
+} from "react-bootstrap";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -39,33 +42,40 @@ export default function Home() {
   };
 
   return (
-    <div className="container">
-      <div className="navbar">
-        <h1>Task List</h1>
-        <div className="navbar-right">
-          <button onClick={handleAddTask} className="add-task-button">
-            Add Task
-          </button>
-          <div className="dropdown">
-            <button onClick={toggleDropdown} className="dropdown-button">
-              Menu
-            </button>
-              {dropdownOpen && (
-                <ul className="dropdown-menu">
-                  <li onClick={() => handleNavigation("/profile")}>Profile</li>
-                  <li onClick={handleSignOut}>Sign Out</li>
-                </ul>
-              )}  
+    <div>
+        <header>
+          <div className="navbar">
+            <h1>Task List</h1>
+            <div className="navbar-right">
+              <button onClick={handleAddTask} className="add-task-button">
+                Add Task
+              </button>
+              <div className="dropdown">
+                <button onClick={toggleDropdown} className="dropdown-button">
+                  Menu
+                </button>
+                  {dropdownOpen && (
+                    <ul className="dropdown-menu">
+                      <li onClick={() => handleNavigation("/profile")}>Profile</li>
+                      <li onClick={handleSignOut}>Sign Out</li>
+                    </ul>
+                  )}  
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            <p>{task.title}: {task.description}</p>
-          </li>
-        ))}
-      </ul>
+        </header>
+        <Container>
+          <ul>
+            {tasks.map((task) => (
+              <li key={task.id}>
+                <p>{task.title}: {task.description}</p>
+              </li>
+            ))}
+          </ul>
+        </Container>
     </div>
-  );
-}
+    )
+
+  
+  
+  }
