@@ -16,11 +16,7 @@ export default function Home() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
 
-  const tasks2 = [
-    { id: 1, title: "Task 1", description: "Complete the onboarding project" },
-    { id: 2, title: "Task 2", description: "Review the code" },
-    { id: 3, title: "Task 3", description: "Submit the project" },
-  ];
+
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -79,9 +75,9 @@ export default function Home() {
         </div>
       </div>
       <ul>
-        {tasks2.map((task) => (
+        {tasks.map((task) => (
           <li key={task.id} onClick={() => handleTaskClick(task.id)} style={{ cursor: 'pointer' }}>
-            <p>{task.title}: {task.description}</p>
+            <p>{task.title}: {task.content}</p>
           </li>
         ))}
       </ul>
