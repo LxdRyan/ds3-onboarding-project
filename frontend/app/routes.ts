@@ -7,4 +7,5 @@ export default [
   route("profile", "routes/profile.tsx"),
   route("update", "routes/update.tsx"),
   route("signup", "routes/signup.tsx"),
+  route("task/:taskId", "routes/details.tsx"),
 ]

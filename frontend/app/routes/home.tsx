@@ -1,7 +1,8 @@
 import type { Route } from "./+types/home";
 import { useNavigate } from "react-router-dom";
 import "./home.css"; // Import the CSS file
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axiosInstance from '~/services/axios';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,15 +11,29 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-const tasks = [
-  { id: 1, title: "Task 1", description: "Complete the onboarding project" },
-  { id: 2, title: "Task 2", description: "Review the code" },
-  { id: 3, title: "Task 3", description: "Submit the project" },
-];
-
 export default function Home() {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [tasks, setTasks] = useState([]);
+
+  const tasks2 = [
+    { id: 1, title: "Task 1", description: "Complete the onboarding project" },
+    { id: 2, title: "Task 2", description: "Review the code" },
+    { id: 3, title: "Task 3", description: "Submit the project" },
+  ];
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axiosInstance.get('/tasks');
+        setTasks(response.data);
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
+      }
+    };
+
+    fetchTasks();
+  }, []);
 
   const handleSignOut = () => {
     // Add your sign out logic here
@@ -36,6 +51,10 @@ export default function Home() {
 
   const handleAddTask = () => {
     navigate("/add");
+  };
+
+  const handleTaskClick = (taskId: number) => {
+    navigate(`/task/${taskId}`);
   };
 
   return (
@@ -60,8 +79,8 @@ export default function Home() {
         </div>
       </div>
       <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>
+        {tasks2.map((task) => (
+          <li key={task.id} onClick={() => handleTaskClick(task.id)} style={{ cursor: 'pointer' }}>
             <p>{task.title}: {task.description}</p>
           </li>
         ))}

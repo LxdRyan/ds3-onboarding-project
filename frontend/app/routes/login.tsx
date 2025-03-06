@@ -7,6 +7,8 @@ const LoginPage: React.FC = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
+
+    
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
