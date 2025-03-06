@@ -13,9 +13,9 @@ const LoginPage: React.FC = () => {
         event.preventDefault();
         try {
             const response = await axiosInstance.get('/users/0', {
-                
             });
-
+            console.log(response.data);
+            
             if (response.data.success) {
                 console.log('Login Successful:', response.data);
                 alert('Login successful!');
