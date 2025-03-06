@@ -10,9 +10,10 @@ CREATE TABLE IF NOT EXISTS TASKS (
 
 CREATE TABLE IF NOT EXISTS USERS (
     user_id INT PRIMARY KEY,
-    username VARCHAR(10),
-    password VARCHAR(10)
+    username VARCHAR(100),
+    password VARCHAR(100),
+    pfp TEXT
 );
 
 INSERT INTO TASKS (id, name, contents, date, status, priority) VALUES (0,'Testing', 'testing task', '2025-05-03', 'unfinished', 'Low');
-INSERT INTO USERS (user_id, username, password) VALUES (0, 'test', 'test');
+INSERT INTO USERS (user_id, username, password, pfp) VALUES (0, 'test', 'test', 'https://images.pexels.com/photos/25724405/pexels-photo-25724405/free-photo-of-illuminated-soccer-pitch.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');

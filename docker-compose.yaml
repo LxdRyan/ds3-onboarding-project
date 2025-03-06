@@ -12,6 +12,8 @@
 
 services:
   backend:
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
@@ -21,9 +23,9 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 5432
-      DB_USER: myuser
-      DB_PASS: mypassword
-      DB_NAME: mydatabase
+      DB_USER: ${POSTGRES_USER}
+      DB_PASS: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
     depends_on:
       - db
 
