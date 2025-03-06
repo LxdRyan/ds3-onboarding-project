@@ -5,14 +5,14 @@ CREATE TABLE IF NOT EXISTS TASKS (
     contents TEXT,
     due_date DATE,
     status VARCHAR,
-    priority VARCHAR(10)
+    priority VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS USERS (
     id INT PRIMARY KEY,
     name VARCHAR(100),
     username VARCHAR(100),
-    password VARCHAR(100),
+    password VARCHAR(160),
     profile_picture TEXT
 );
 
