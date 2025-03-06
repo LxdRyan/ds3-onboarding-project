@@ -1,24 +1,36 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../services/axios';
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        // Handle login logic here
-        console.log('Username:', username);
-        console.log('Password:', password);
-        // Navigate to home page
-        navigate('/');
+        try {
+            const response = await axiosInstance.get('/users/0', {
+                
+            });
+
+            if (response.data.success) {
+                console.log('Login Successful:', response.data);
+                alert('Login successful!');
+                // Navigate to home page
+                navigate('/');
+            } else {
+                alert('Invalid username or password');
+            }
+        } catch (error) {
+            console.error('Login failed:', error);
+            alert('Login failed!');
+        }
     };
 
     const handleSignUp = () => {
         navigate('/signup');
     };
-
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f0f2f5' }}>
