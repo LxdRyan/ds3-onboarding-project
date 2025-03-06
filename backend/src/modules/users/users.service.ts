@@ -22,7 +22,7 @@ export class UsersService {
       id: user.id,
       name: user.name,
       username: user.username,
-      profilePicture: user.profile_picture
+      profile_picture: user.profile_picture
         ? `data:image/png;base64,${user.profile_picture.toString('base64')}`
         : null,
     };

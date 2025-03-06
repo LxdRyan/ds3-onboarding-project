@@ -10,5 +10,5 @@ export class UpdateUserDTO {
   password?: string;
 
   @IsOptional()
-  profilePicture?: Buffer;
+  profile_picture?: Buffer;
 }

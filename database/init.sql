@@ -1,14 +1,15 @@
 CREATE TABLE IF NOT EXISTS TASKS (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(100),
     contents TEXT,
+    creator INT REFERENCES USERS(id),
     due_date DATE,
     status VARCHAR,
     priority VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS USERS (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(100),
     username VARCHAR(100),
     password VARCHAR(160),

@@ -14,5 +14,5 @@ export class CreateUserDTO {
   password: string;
 
   @IsOptional()
-  profilePicture?: Buffer;
+  profile_picture?: Buffer;
 }
