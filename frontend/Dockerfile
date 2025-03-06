@@ -21,18 +21,3 @@ COPY --from=build-env /app/build /app/build
 WORKDIR /app
 EXPOSE 3000
 CMD ["npm", "run", "start"]
-
-# FROM node:22 as build
-
-# WORKDIR /app
-
-# COPY frontend/package.json frontend/package-lock.json ./
-# RUN npm install
-
-# COPY frontend ./
-# RUN npm run build
-
-# FROM nginx:alpine
-# COPY --from=build /app/build /usr/share/nginx/html
-# EXPOSE 3000
-# CMD ["nginx", "-g", "daemon off;"]
