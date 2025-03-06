@@ -27,5 +27,20 @@ p {
     line-height: 1.6;
 }
 
+#header1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 5px solid red;
+}
+
+#list_container {
+    border: 5px solid blue;
+}
+
+.list_item {
+    border: 5px solid green;
+}
 
   

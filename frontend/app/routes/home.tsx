@@ -58,7 +58,7 @@ export default function Home() {
 
   return (
     <div>
-        <header>
+        <header id="header1">
           <div className="navbar">
             <h1>Task List</h1>
             <div className="navbar-right">
@@ -78,15 +78,18 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id} onClick={() => handleTaskClick(task.id)} style={{ cursor: 'pointer' }}>
-            <p>{task.title}: {task.content}</p>
-          </li>
-        ))}
-      </ul>
+        </header>
+      <Container id="list_container">
+        <ul>
+          {tasks.map((task) => (
+            <Container className="task_item">
+              <li key={task.id} onClick={() => handleTaskClick(task.id)} style={{ cursor: 'pointer' }}>
+                <p>{task.title}: {task.content}</p>
+              </li>
+            </Container>
+          ))}
+        </ul>
+      </Container>
     </div>
     )
 
