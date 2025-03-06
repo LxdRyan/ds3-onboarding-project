@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [profilePicture, setProfilePicture] = useState<File | null>(null);
-    const [profilePictureUrl, setProfilePictureUrl] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent) => {
@@ -13,18 +11,14 @@ const LoginPage: React.FC = () => {
         // Handle login logic here
         console.log('Username:', username);
         console.log('Password:', password);
-        console.log('Profile Picture:', profilePicture);
         // Navigate to home page
         navigate('/');
     };
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            setProfilePicture(file);
-            setProfilePictureUrl(URL.createObjectURL(file));
-        }
+    const handleSignUp = () => {
+        navigate('/signup');
     };
+
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f0f2f5' }}>
@@ -50,21 +44,11 @@ const LoginPage: React.FC = () => {
                         style={{marginLeft:"10px", marginBottom: '10px', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
                     />
                 </label>
-                <label style={{ color: 'black', marginBottom: '10px' }}>
-                    Profile Picture:
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        style={{ marginBottom: '10px', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-                    />
-                </label>
-                {profilePictureUrl && (
-                    <img src={profilePictureUrl} alt="Profile" style={{ marginBottom: '10px', width: '100%', borderRadius: '4px' }} />
-                )}
                 <button type="submit" style={{ padding: '10px', backgroundColor: '#007BFF', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
                     Login
                 </button>
+                <span style={{ margin: '0 10px' }}></span>
+                <button style={{color: "black"}}type="button" onClick={handleSignUp}>New User</button>
             </form>
         </div>
     );
