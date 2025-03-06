@@ -5,6 +5,10 @@ export class UpdateUserDTO {
   @IsOptional()
   name: string;
 
+  @IsString()
+  @IsOptional()
+  username: string;
+
   @IsOptional()
   profile_picture?: Buffer;
 }

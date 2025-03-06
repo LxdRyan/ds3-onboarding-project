@@ -1,6 +1,6 @@
 import { IsString, IsNumber, IsNotEmpty, IsOptional, IsDate } from 'class-validator';
 
-export class CreateUserDTO {
+export class UpdateTaskDTO {
   @IsNumber()
   @IsNotEmpty()
   id: number;

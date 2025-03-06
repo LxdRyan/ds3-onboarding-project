@@ -1,3 +1,11 @@
+CREATE TABLE IF NOT EXISTS USERS (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    username VARCHAR(100),
+    password VARCHAR(160),
+    profile_picture TEXT
+);
+
 CREATE TABLE IF NOT EXISTS TASKS (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
@@ -6,14 +14,6 @@ CREATE TABLE IF NOT EXISTS TASKS (
     due_date DATE,
     status VARCHAR,
     priority VARCHAR(20)
-);
-
-CREATE TABLE IF NOT EXISTS USERS (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100),
-    username VARCHAR(100),
-    password VARCHAR(160),
-    profile_picture TEXT
 );
 
 INSERT INTO TASKS (id, name, contents, due_date, status, priority) VALUES (0,'Testing', 'testing task', '2025-05-03', 'unfinished', 'Low');
