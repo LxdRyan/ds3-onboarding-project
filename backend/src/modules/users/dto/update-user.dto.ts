@@ -3,12 +3,12 @@ import { IsString, IsOptional } from 'class-validator';
 export class UpdateUserDTO {
   @IsString()
   @IsOptional()
-  username?: string;
+  name: string;
 
   @IsString()
   @IsOptional()
-  password?: string;
+  username: string;
 
   @IsOptional()
-  profilePicture?: Buffer;
+  profile_picture?: Buffer;
 }

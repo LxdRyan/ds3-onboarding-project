@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AddTask.css'; // Import the CSS file
+import axiosInstance from '../services/axios';
 
 const AddTask: React.FC = () => {
     const [taskName, setTaskName] = useState('');
@@ -24,6 +25,7 @@ const AddTask: React.FC = () => {
         };
         console.log('New Task:', newTask);
         // Add logic to save the task
+        axiosInstance.post('/tasks/0', newTask);
         alert('Task added');
         navigate('/');
     };

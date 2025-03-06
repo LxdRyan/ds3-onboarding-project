@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '~/services/axios';
 
 const SignUpPage: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -10,21 +11,41 @@ const SignUpPage: React.FC = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        // Handle login logic here
-        console.log('Username:', username);
-        console.log('Name:', name);
-        console.log('Password:', password);
-        console.log('Confirm Password', confirmPassword);
+
         if (password !== confirmPassword) {
             setError("Passwords do not match!");
             return;
-          };
-          setError("");
-        console.log('Profile Picture:', profilePicture);
-        // Navigate to home page
-        navigate('/');
+        }
+        setError("");
+
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('password', password);
+        if (profilePicture) {
+            formData.append('profilePicture', profilePicture);
+        }
+
+        try {
+            const response = await axiosInstance.post('/users', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            if (response.data.success) {
+                console.log('Sign-Up Successful:', response.data);
+                alert('Sign-Up successful!');
+                // Navigate to login page
+                navigate('/login');
+            } else {
+                setError(response.data.message || 'Sign-Up failed');
+            }
+        } catch (error) {
+            console.error('Sign-Up failed:', error);
+            setError('Sign-Up failed!');
+        }
     };
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
