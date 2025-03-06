@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { User } from '../../users/entities/user.entity';
+import { Users } from '../../users/entities/user.entity';
 
 @Entity()
-export class Task {
+export class Tasks {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,11 +12,11 @@ export class Task {
   @Column()
   contents: string;
 
-  @ManyToOne(() => User, (user) => user.tasks, { eager: true })
-  creator: User;
+  @ManyToOne(() => Users, (user) => user.tasks, { eager: true })
+  creator: Users;
 
   @Column()
-  dueDate: Date;
+  due_date: Date;
 
   @Column()
   status: string;

@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany } from 'typeorm';
-import { Task } from '../../tasks/entities/task.entity';
+import { Tasks } from '../../tasks/entities/task.entity';
 import { randomBytes, scryptSync } from 'crypto';
 
 @Entity()
-export class User {
+export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,8 +23,8 @@ export class User {
   }
 
   @Column({ type: 'bytea', nullable: true })
-  profilePicture: Buffer | null;
+  profile_picture: Buffer | null;
 
-  @OneToMany(() => Task, (task) => task.creator)
-  tasks: Task[];
+  @OneToMany(() => Tasks, (task) => task.creator)
+  tasks: Tasks[];
 }

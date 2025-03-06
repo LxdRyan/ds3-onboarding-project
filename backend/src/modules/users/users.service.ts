@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { Users } from './entities/user.entity';
 import { UserDTO } from './dto/user.dto';
 import { CreateUserDTO } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(Users) private readonly userRepository: Repository<Users>,
   ) {}
 
   async getUserById(id: number): Promise<UserDTO | null> {
-    const user = await this.userRepository.findOne({ where: { id } });
+    const user = await this.userRepository.findOne({ where: { id: id } });
 
     if (!user) {
       throw new Error('user not found');
@@ -22,31 +22,21 @@ export class UsersService {
       id: user.id,
       name: user.name,
       username: user.username,
-      profilePicture: user.profilePicture
-        ? `data:image/png;base64,${user.profilePicture.toString('base64')}`
+      profilePicture: user.profile_picture
+        ? `data:image/png;base64,${user.profile_picture.toString('base64')}`
         : null,
     };
   }
 
-  async getUserByUsername(username: string): Promise<User | null> {
+  async getUserByUsername(username: string): Promise<Users | null> {
     return this.userRepository.findOne({ where: { username } });
   }
 
   async createUser(
     createUserDTO: CreateUserDTO,
-  ): Promise<User> {
+  ): Promise<Users> {
     const user = this.userRepository.create(createUserDTO);
 
     return this.userRepository.save(user);
-  }
-
-  async testDatabaseConnection(): Promise<string> {
-    try {
-      await this.userRepository.query('SELECT 1');
-      return 'database connected';
-    } catch (error) {
-      console.error('database connection error:', error);
-      return 'database connection failed';
-    }
   }
 }

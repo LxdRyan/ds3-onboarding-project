@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Task } from './entities/task.entity';
-import { User } from '../users/entities/user.entity';
+import { Tasks } from './entities/task.entity';
+import { Users } from '../users/entities/user.entity';
 
 @Injectable()
 export class TasksService {
   constructor(
-    @InjectRepository(Task)
-    private readonly taskRepository: Repository<Task>,
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    @InjectRepository(Tasks)
+    private readonly taskRepository: Repository<Tasks>,
+    @InjectRepository(Users)
+    private readonly userRepository: Repository<Users>,
   ) {}
 
-  async createTask(userId: number, taskData: Partial<Task>): Promise<Task> {
+  async createTask(userId: number, taskData: Partial<Tasks>): Promise<Tasks> {
     try {
       const user = await this.userRepository.findOne({ where: { id: userId } });
       if (!user) {
@@ -30,7 +30,7 @@ export class TasksService {
     }
   }
 
-  async getTasks(): Promise<Task[]> {
+  async getTasks(): Promise<Tasks[]> {
     try {
       return this.taskRepository.find({ relations: ['creator'] });
     } catch (error) {
