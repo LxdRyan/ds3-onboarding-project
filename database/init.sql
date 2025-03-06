@@ -1,4 +1,3 @@
--- create table
 CREATE TABLE IF NOT EXISTS TASKS (
     id INT PRIMARY KEY,
     name VARCHAR(100),
