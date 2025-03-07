@@ -1,0 +1,31 @@
+.task_item {
+    border: 5px solid red
+}
+
+body {
+    background: #9053c7;
+    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
+    width: 100%;
+  }
+
+.task_box {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.header {
+    width: 100%;
+    background-color: white;
+}
+
+body{
+    height: 100%;
+}
+
+.content_container {
+    background-color: white;
+}
