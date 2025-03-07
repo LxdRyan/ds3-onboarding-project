@@ -16,5 +16,5 @@ CREATE TABLE IF NOT EXISTS TASKS (
     priority VARCHAR(20)
 );
 
-INSERT INTO TASKS (id, name, contents, due_date, status, priority) VALUES (0,'Testing', 'testing task', '2025-05-03', 'unfinished', 'Low');
 INSERT INTO USERS (id, name, username, password, profile_picture) VALUES (0, 'test', 'test', 'test', 'https://images.pexels.com/photos/25724405/pexels-photo-25724405/free-photo-of-illuminated-soccer-pitch.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+INSERT INTO TASKS (id, name, contents, creator, due_date, status, priority) VALUES (0,'Testing', 'testing task', 0, '2025-05-03', 'unfinished', 'Low');

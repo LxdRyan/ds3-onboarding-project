@@ -16,24 +16,31 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+
+  const mockTasks = [
+    { id: 1, title: "Task 1", content: "This is Task 1's content" },
+    { id: 2, title: "Task 2", content: "This is Task 2's content" },
+    { id: 3, title: "Task 3", content: "This is Task 3's content" },
+  ];
+
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(mockTasks);
 
 
+  // useEffect(() => {
+  //   const fetchTasks = async () => {
+  //     try {
+  //       const response = await axiosInstance.get('/tasks');
+  //       setTasks(response.data);
+  //     } catch (error) {
+  //       console.error('Failed to fetch tasks:', error);
+  //     }
+  //   };
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await axiosInstance.get('/tasks');
-        setTasks(response.data);
-      } catch (error) {
-        console.error('Failed to fetch tasks:', error);
-      }
-    };
+  //   fetchTasks();
+  // }, []);
 
-    fetchTasks();
-  }, []);
 
   const handleSignOut = () => {
     // Add your sign out logic here

@@ -11,14 +11,16 @@ export class UsersService {
   constructor(
     @InjectRepository(Users) private readonly userRepository: Repository<Users>,
   ) {}
-  
-  async createUser(
-      createUserDTO: CreateUserDTO,
-    ): Promise<Users> {
-      const user = this.userRepository.create(createUserDTO);
-  
-      return this.userRepository.save(user);
-    }
+
+  async findOne(username: string): Promise<Users | null> {
+    return this.userRepository.findOne({ where: { username } });
+  }
+
+  async createUser(createUserDTO: CreateUserDTO): Promise<Users> {
+    const user = this.userRepository.create(createUserDTO);
+
+    return this.userRepository.save(user);
+  }
 
   async getUserById(id: number): Promise<UserDTO | null> {
     const user = await this.userRepository.findOne({ where: { id: id } });

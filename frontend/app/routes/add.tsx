@@ -25,7 +25,7 @@ const AddTask: React.FC = () => {
         };
         console.log('New Task:', newTask);
         // Add logic to save the task
-        axiosInstance.post('/tasks/0', newTask);
+        axiosInstance.post('/tasks', newTask);
         alert('Task added');
         navigate('/');
     };

@@ -15,4 +15,22 @@ export class TasksController {
   ): Promise<Tasks> {
     return this.tasksService.createTask(userId, createTaskDto);
   }
+
+  @Get()
+  async getTasks(): Promise<Tasks[]> {
+    return this.tasksService.getTasks();
+  }
+
+  @Get(':id')
+  async getTaskById(@Param('id') id: number): Promise<Tasks> {
+    return this.tasksService.getTaskById(id);
+  }
+
+  @Put(':id')
+  async updateTask(
+    @Param('id') id: number,
+    @Body() updateTaskDto: UpdateTaskDTO,
+  ): Promise<Tasks> {
+    return this.tasksService.updateTask(id, updateTaskDto);
+  }
 }

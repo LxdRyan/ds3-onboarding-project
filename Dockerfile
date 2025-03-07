@@ -1,5 +1,8 @@
 FROM node:22
 
+ARG BACKEND_PORT
+ARG FRONTEND_PORT
+
 WORKDIR /app
 
 RUN npm install -g serve
@@ -19,7 +22,7 @@ RUN npm install --prefix backend
 # copy backend files
 COPY backend ./backend 
 
-EXPOSE 3000 5000
+EXPOSE ${BACKEND_PORT} ${FRONTEND_PORT}
 
 # CMD ["sh", "-c", "serve -s frontend/build -l 3000 & npm --prefix backend run start"]
 CMD ["npm", "--prefix", "backend", "run", "start"]
