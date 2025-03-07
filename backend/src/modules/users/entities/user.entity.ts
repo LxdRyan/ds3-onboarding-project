@@ -27,4 +27,9 @@ export class Users {
 
   @OneToMany(() => Tasks, (task) => task.creator)
   tasks: Tasks[];
+
+  validatePassword(incomingPassword: string): boolean {
+    const salt = this.password.slice(0, 32); // get salt from stored password
+    return this.password === salt + scryptSync(incomingPassword, salt, 64).toString('hex'); // compare hashed password
+  }
 }
