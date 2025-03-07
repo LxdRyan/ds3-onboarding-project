@@ -8,23 +8,32 @@ const UpdateTask: React.FC = () => {
 
     // State variables for task fields
     const [taskContents, setTaskContents] = useState('');
-    const [creator, setCreator] = useState('');
+    const [name, setName] = useState('');
     const [due_date, setDueDate] = useState('');
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
 
-    // Fetch task details on component mount
+    const extractDate = (dateTimeString: string): string => {
+        const date = new Date(dateTimeString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`; // Returns the date in YYYY-MM-DD format
+      };
+      
+    //Fetch task details on component mount
     useEffect(() => {
         const fetchTaskDetails = async () => {
             try {
                 const response = await axiosInstance.get(`/tasks/${taskId}`);
                 const task = response.data;
                 console.log('Task:', task);
+                const date = extractDate(task.due_date);
 
                 // Populate state variables with task data
                 setTaskContents(task.contents || '');
-                setCreator(task.creator || '');
-                setDueDate(task.due_date || '');
+                setName(task.name || '');
+                setDueDate(date || '');
                 setStatus(task.status || '');
                 setPriority(task.priority || '');
             } catch (error) {
@@ -36,11 +45,13 @@ const UpdateTask: React.FC = () => {
         fetchTaskDetails();
     }, [taskId]);
 
+
+    
     const handleUpdate = async () => {
         try {
             const updatedTask = {
                 contents: taskContents,
-                creator,
+                name,
                 due_date,
                 status,
                 priority,
@@ -98,6 +109,22 @@ const UpdateTask: React.FC = () => {
                     Delete
                 </button>
                 <div className="form-group">
+                    <label>Title:</label>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        style={{
+                            width: '100%',
+                            padding: '8px',
+                            borderRadius: '4px',
+                            border: '1px solid #ccc',
+                            marginBottom: '10px',
+                        }}
+                    />
+                </div>
+                <div className="form-group">
                     <label>Task Contents:</label>
                     <textarea
                         value={taskContents}
@@ -112,22 +139,7 @@ const UpdateTask: React.FC = () => {
                         }}
                     />
                 </div>
-                <div className="form-group">
-                    <label>Creator:</label>
-                    <input
-                        type="text"
-                        value={creator}
-                        onChange={(e) => setCreator(e.target.value)}
-                        required
-                        style={{
-                            width: '100%',
-                            padding: '8px',
-                            borderRadius: '4px',
-                            border: '1px solid #ccc',
-                            marginBottom: '10px',
-                        }}
-                    />
-                </div>
+
                 <div className="form-group">
                     <label>Due Date:</label>
                     <input
