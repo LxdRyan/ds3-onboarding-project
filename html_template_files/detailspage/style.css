@@ -9,6 +9,7 @@ body {
     background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
     background: linear-gradient(-135deg, #c850c0, #4158d0);
     width: 100%;
+    min-height: 100vh;
   }
 
 .task_box {
@@ -17,15 +18,13 @@ body {
     border-radius: 10px;
 }
 
-.header {
-    width: 100%;
-    background-color: white;
-}
-
-body{
-    height: 100%;
-}
-
 .content_container {
     background-color: white;
+    width: 80%;
+    margin: auto;
+    min-height: 100vh;
+}
+
+.spacer{
+    padding-top: 10%;
 }
