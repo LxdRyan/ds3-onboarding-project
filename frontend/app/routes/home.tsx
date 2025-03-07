@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./home.css"; // Import the CSS file
 import {
   Container,
+  Navbar
 } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axiosInstance from '~/services/axios';
@@ -57,9 +58,9 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="wtf">
         <header id="header1">
-          <div className="navbar">
+          <Navbar>
             <h1>Task List</h1>
             <div className="navbar-right">
               <button onClick={handleAddTask} className="add-task-button">
@@ -70,14 +71,14 @@ export default function Home() {
                   Menu
                 </button>
                   {dropdownOpen && (
-                    <ul className="dropdown-menu">
+                    <ul className="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px">
                       <li onClick={() => handleNavigation("/profile")}>Profile</li>
                       <li onClick={handleSignOut}>Sign Out</li>
                     </ul>
                   )}  
               </div>
             </div>
-          </div>
+          </Navbar>
         </header>
       <Container id="list_container">
         <ul>
