@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: white;
     color: black;
 }
@@ -6,4 +6,32 @@ body {
 
 .task_item {
     border: 5px solid red
+} */
+
+.task_item {
+    border: 5px solid red
+}
+
+
+body {
+    background: #9053c7;
+    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
+    width: 100%;
+    min-height: 100vh;
+  }
+
+.task_box {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.py-4 {
+    background-color: white;
+    width: 80%;
+    margin: auto;
+    min-height: 100vh;
 }
