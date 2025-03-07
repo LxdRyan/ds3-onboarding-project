@@ -9,7 +9,7 @@ const UpdateTask: React.FC = () => {
     // State variables for task fields
     const [taskContents, setTaskContents] = useState('');
     const [creator, setCreator] = useState('');
-    const [dueDate, setDueDate] = useState('');
+    const [due_date, setDueDate] = useState('');
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
 
@@ -21,9 +21,9 @@ const UpdateTask: React.FC = () => {
                 const task = response.data;
 
                 // Populate state variables with task data
-                setTaskContents(task.content || '');
+                setTaskContents(task.contents || '');
                 setCreator(task.creator || '');
-                setDueDate(task.dueDate || '');
+                setDueDate(task.due_date || '');
                 setStatus(task.status || '');
                 setPriority(task.priority || '');
             } catch (error) {
@@ -38,9 +38,9 @@ const UpdateTask: React.FC = () => {
     const handleUpdate = async () => {
         try {
             const updatedTask = {
-                content: taskContents,
+                contents: taskContents,
                 creator,
-                dueDate,
+                due_date,
                 status,
                 priority,
             };
@@ -131,7 +131,7 @@ const UpdateTask: React.FC = () => {
                     <label>Due Date:</label>
                     <input
                         type="date"
-                        value={dueDate}
+                        value={due_date}
                         onChange={(e) => setDueDate(e.target.value)}
                         required
                         style={{
