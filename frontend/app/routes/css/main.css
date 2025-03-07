@@ -176,7 +176,8 @@ iframe {
 }
 
 .wrap-login100 {
-  width: 960px;
+  width: 90%;
+  height: 90%;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -205,7 +206,8 @@ iframe {
 /*------------------------------------------------------------------
 [  ]*/
 .login100-form {
-  width: 290px;
+  width: 80%;
+  padding-left: 25%;
 }
 
 .login100-form-title {
@@ -459,4 +461,27 @@ iframe {
     visibility: visible;
     opacity: 1;
   }
+}
+
+/* Add spacing and adjustments for new input types like textarea and select */
+textarea.input100,
+select.input100 {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  border: none;
+  border-radius: 5px;
+  background: #f2f2f2;
+  color: #333;
+}
+
+textarea.input100 {
+  height: 100px;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+  
 }
