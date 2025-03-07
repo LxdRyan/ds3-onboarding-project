@@ -65,7 +65,7 @@ const SignUpPage: React.FC = () => {
       <div className="container-login100">
         <div className="wrap-login100">
           <div className="login100-pic js-tilt" data-tilt>
-            <img src="app/routes/images/img-01.png" alt="Sign-Up Illustration" />
+            <img src="https://mitly.us/webroot/assets/register/images/img-01.png" alt="Sign-Up Illustration" />
           </div>
 
           <form className="login100-form validate-form" onSubmit={handleSubmit}>
