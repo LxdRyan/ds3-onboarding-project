@@ -38,7 +38,7 @@ const LoginPage: React.FC = () => {
       <div className="container-login100">
         <div className="wrap-login100">
           <div className="login100-pic js-tilt" data-tilt>
-            <img src="images/img-01.png" alt="Login Illustration" />
+            <img src="app/routes/images/img-01.png" alt="Login Illustration" />
           </div>
 
           <form className="login100-form validate-form" onSubmit={handleSubmit}>
