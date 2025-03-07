@@ -33,11 +33,7 @@ const SignUpPage: React.FC = () => {
     }
 
     try {
-      const response = await axiosInstance.post("/users", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axiosInstance.post("/users", formData);
 
       if (response.data.success) {
         console.log("Sign-Up Successful:", response.data);

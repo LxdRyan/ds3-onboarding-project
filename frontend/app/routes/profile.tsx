@@ -12,7 +12,7 @@ const Profile: React.FC = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axiosInstance.get('/users'); // Fetch user data from `/users` endpoint
+                const response = await axiosInstance.get('/users/0'); // Fetch user data from `/users` endpoint
                 const user = response.data[0]; // Assuming the first user is the logged-in user
                 setUsername(user.username);
                 setProfilePicture(user.profilepicture); // Initialize current profile picture
