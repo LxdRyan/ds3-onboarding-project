@@ -1,0 +1,32 @@
+name: Run Docker Compose in CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker-compose-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Start Docker Compose Services
+        run: docker-compose up -d
+
+      - name: Wait for Services to Be Ready
+        run: sleep 10
+
+      - name: Run Tests (Optional)
+        run: docker-compose exec -T <your-service-name> npm test
+
+      - name: Stop and Clean Up
+        run: docker-compose down
