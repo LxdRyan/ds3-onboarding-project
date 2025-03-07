@@ -22,7 +22,8 @@ export class TasksService {
     }
 
     const task = this.taskRepository.create({ ...createTaskDto, creator_id: user.id });
-    return this.taskRepository.save(task);
+    await this.taskRepository.save(task);
+    return task;
   }
 
   async getTasks(): Promise<Tasks[]> {

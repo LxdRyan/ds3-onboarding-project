@@ -18,8 +18,8 @@ export class UsersService {
 
   async createUser(createUserDTO: CreateUserDTO): Promise<Users> {
     const user = this.userRepository.create(createUserDTO);
-
-    return this.userRepository.save(user);
+    await this.userRepository.save(user);
+    return user;
   }
 
   async getUserById(id: number): Promise<UserDTO | null> {

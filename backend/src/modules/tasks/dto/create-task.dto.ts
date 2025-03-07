@@ -15,7 +15,7 @@ export class CreateTaskDTO {
 
   @IsNumber()
   @IsNotEmpty()
-  creator: number;
+  creator_id: number;
 
   @IsDate()
   @IsNotEmpty()
