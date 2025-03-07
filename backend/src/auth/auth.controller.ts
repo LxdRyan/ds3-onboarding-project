@@ -8,13 +8,6 @@ import { AuthLocalGuard } from './auth.local.guard';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  // @Public()
-  // @HttpCode(HttpStatus.OK)
-  // @Post('login')
-  // login(@Body() signInDto: Record<string, any>) {
-  //   return this.authService.signIn(signInDto.username, signInDto.password);
-  // }
-
   @Public()
   @HttpCode(HttpStatus.OK)
   @Post('login')
@@ -23,7 +16,6 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  @Public()
   @HttpCode(HttpStatus.OK)
   @Post('logout')
   @UseGuards(AuthLocalGuard)

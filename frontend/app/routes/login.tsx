@@ -19,7 +19,9 @@ const LoginPage: React.FC = () => {
           password
         }
       );
-      console.log(response.data);
+
+      const token = response.data.access_token;
+      sessionStorage.setItem("jwt", token);
 
       if (response.data.success) {
         console.log("Login Successful:", response.data);

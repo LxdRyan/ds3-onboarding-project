@@ -6,8 +6,9 @@ import axiosInstance from '~/services/axios';
 
 const TaskDetails: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
-  const [task, setTask] = useState<{ title: string; description: string } | null>(null);
+  const [task, setTask] = useState<{ name: string; contents: string } | null>(null);
   const navigate = useNavigate();
+  const jwt = sessionStorage.getItem('jwt');
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -36,8 +37,8 @@ const TaskDetails: React.FC = () => {
 
   return (
     <div className="task-details">
-      <h2>{task.title}</h2>
-      <p>{task.description}</p>
+      <h2>{task.name}</h2>
+      <p>{task.contents}</p>
       <button onClick={handleEdit} style={{ width: '100%', padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#007BFF', color: 'white', cursor: 'pointer', marginBottom: '10px' }}>
           Edit
       </button>
