@@ -105,6 +105,11 @@ const Home: React.FC = () => {
           {renderTasksByPriority("Low")}
         </section>
       </Container>
+
+      
+      <Button variant="outline-secondary" onClick={() => handleNavigation("/add")}>
+        Add Task
+      </Button>
     </Container>
   );
 };
