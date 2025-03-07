@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Layout from "../services/Layout";
+import Layout from "../services/LayoutAdd";
 import axiosInstance from "../services/axios";
 import Button from "../services/Button";
 
@@ -37,7 +37,7 @@ const AddTask: React.FC = () => {
 
   return (
     <Layout>
-      <form className="login100-form" onSubmit={handleSubmit}>
+      <form className="add100-form" onSubmit={handleSubmit}>
         <span className="login100-form-title">Add New Task</span>
 
         <div className="wrap-input100 validate-input" data-validate="Task Name is required">
@@ -118,6 +118,7 @@ const AddTask: React.FC = () => {
 
         <div className="container-login100-form-btn">
           <Button label="Add Task" onClick={handleSubmit} />
+          <span style={{margin:'20px'}}></span>
           <Button label="Back" onClick={handleBack} className="btn-secondary" />
         </div>
       </form>

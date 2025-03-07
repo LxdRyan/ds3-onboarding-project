@@ -176,8 +176,7 @@ iframe {
 }
 
 .wrap-login100 {
-  width: 90%;
-  height: 90%;
+  width: 960px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -206,8 +205,7 @@ iframe {
 /*------------------------------------------------------------------
 [  ]*/
 .login100-form {
-  width: 80%;
-  padding-left: 25%;
+  width: 290px;
 }
 
 .login100-form-title {
@@ -483,5 +481,10 @@ textarea.input100 {
 .btn-secondary {
   background: #6c757d;
   color: white;
-  
+}
+
+
+.add100-form {
+  width: 90%;
+  padding-left: 16%;
 }
