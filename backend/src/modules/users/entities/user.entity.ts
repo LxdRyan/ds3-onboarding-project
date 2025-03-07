@@ -25,8 +25,8 @@ export class Users {
   @Column({ type: 'bytea', nullable: true })
   profile_picture: Buffer | null;
 
-  @OneToMany(() => Tasks, (task) => task.creator)
-  tasks: Tasks[];
+  // @OneToMany(() => Tasks, (task) => task.creator)
+  // tasks: Tasks[];
 
   validatePassword(incomingPassword: string): boolean {
     const salt = this.password.slice(0, 32); // get salt from stored password

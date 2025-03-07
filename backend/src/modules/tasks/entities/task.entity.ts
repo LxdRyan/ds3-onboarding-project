@@ -12,8 +12,10 @@ export class Tasks {
   @Column()
   contents: string;
 
-  @ManyToOne(() => Users, (user) => user.tasks, { eager: true })
-  creator: Users;
+  // @ManyToOne(() => Users, (user) => user.tasks, { eager: true })
+  // creator: Users;
+  @Column()
+  creator_id: number;
 
   @Column()
   due_date: Date;
