@@ -100,11 +100,11 @@ Each tier builds upon the previous one, creating a clear path to follow.
 **Mission**: Set up the project structure and get familiar with the tools.
 
 **Checkpoints**:
-- [ ] Initialize a Git repository with a README
-- [ ] Create a simple frontend web page that displays a static list of tasks
-- [ ] Set up a basic backend server that can respond to requests
-- [ ] Create Dockerfiles for both frontend and backend components
-- [ ] Each team member makes at least one commit
+- [x] Initialize a Git repository with a README
+- [x] Create a simple frontend web page that displays a static list of tasks
+- [x] Set up a basic backend server that can respond to requests
+- [x] Create Dockerfiles for both frontend and backend components
+- [x] Each team member makes at least one commit
 
 **Victory Condition**: Show a working frontend and backend running in separate containers, even if they don't communicate yet.
 
@@ -112,13 +112,13 @@ Each tier builds upon the previous one, creating a clear path to follow.
 **Mission**: Implement core functionality with proper component communication.
 
 **Checkpoints**:
-- [ ] Set up a database component (can be a simple JSON file to start)
-- [ ] Create API endpoints in the backend for basic CRUD operations
-- [ ] Connect the frontend to the backend API
+- [x] Set up a database component (can be a simple JSON file to start)
+- [x] Create API endpoints in the backend for basic CRUD operations
+- [x] Connect the frontend to the backend API
 - [ ] Implement task creation and viewing in the UI
 - [ ] Implement task completion toggling and deletion
 - [ ] Create feature branches for different components/functionality
-- [ ] Set up Docker Compose to run all components together
+- [x] Set up Docker Compose to run all components together
 - [ ] Update README with basic setup instructions
 
 **Victory Condition**: Demonstrate a functional to-do app with all components working together, where tasks persist between page refreshes.
@@ -130,11 +130,11 @@ Each tier builds upon the previous one, creating a clear path to follow.
 - [ ] Implement a clean, intuitive UI with proper styling
 - [ ] Add task filtering (All, Active, Completed) in the frontend
 - [ ] Enhance the backend with proper error handling and validation
-- [ ] Upgrade to a more robust database solution if using a simple file
+- [x] Upgrade to a more robust database solution if using a simple file
 - [ ] Ensure data persistence is robust (survives container restarts)
-- [ ] Establish a proper Git workflow with meaningful commit messages
-- [ ] Optimize Docker configuration (appropriate base images, port mapping)
-- [ ] Each team member contributes to different components
+- [x] Establish a proper Git workflow with meaningful commit messages
+- [x] Optimize Docker configuration (appropriate base images, port mapping)
+- [x] Each team member contributes to different components
 - [ ] Create comprehensive documentation including architecture diagram
 
 **Victory Condition**: Present a polished application with all three components (frontend, backend, database) working together seamlessly.
@@ -161,7 +161,7 @@ Each tier builds upon the previous one, creating a clear path to follow.
 **Checkpoints**:
 - [ ] Implement user accounts or session management
 - [ ] Add collaborative features (assigned tasks, comments)
-- [ ] Create a responsive design that works on mobile devices
+- [ ] Create a responsive design that works on different screen sizes
 - [ ] Implement keyboard shortcuts and accessibility features
 - [ ] Set up a CI/CD pipeline for automated testing/deployment
 - [ ] Implement database backups and recovery procedures
