@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await axiosInstance.get("/auth/login", {});
+      const response = await axiosInstance.get("/users/0", {});
       console.log(response.data);
 
       if (response.data.success) {
