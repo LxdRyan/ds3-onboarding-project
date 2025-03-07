@@ -11,7 +11,6 @@ body {
 
 .container {
     text-align: center;
-    padding: 200px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -38,6 +37,7 @@ p {
 #list_container {
     border: 5px solid blue;
     width: 100%;
+    display: flex;
 }
 
 .task_item {
