@@ -1,28 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '~/services/axios';
 
 const Profile: React.FC = () => {
-    const [username] = useState('JohnDoe');
-    const [profilePicture, setProfilePicture] = useState('default-profile-pic.jpg');
-    const [newProfilePicture, setNewProfilePicture] = useState<string | null>(null);
+    const [username, setUsername] = useState(''); // User's name
+    const [profilePicture, setProfilePicture] = useState<string>(''); // Current profile picture
+    const [newProfilePicture, setNewProfilePicture] = useState<string | null>(null); // New profile picture
     const navigate = useNavigate();
+
+    // Fetch user data on component mount
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axiosInstance.get('/users'); // Fetch user data from `/users` endpoint
+                const user = response.data[0]; // Assuming the first user is the logged-in user
+                setUsername(user.username);
+                setProfilePicture(user.profilepicture); // Initialize current profile picture
+            } catch (error) {
+                console.error('Failed to fetch user data:', error);
+                alert('Unable to load profile data');
+            }
+        };
+
+        fetchUserData();
+    }, []);
 
     const handleProfilePictureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
             const file = event.target.files[0];
             const reader = new FileReader();
             reader.onloadend = () => {
-                setNewProfilePicture(reader.result as string);
+                setNewProfilePicture(reader.result as string); // Temporarily update new profile picture
             };
             reader.readAsDataURL(file);
         }
     };
 
-    const handleConfirmChange = () => {
+    const handleConfirmChange = async () => {
         if (newProfilePicture) {
-            setProfilePicture(newProfilePicture);
-            alert('Profile picture updated!');
-            navigate('/');
+            try {
+                // Send updated data to the database
+                await axiosInstance.put('/users/1', { // Assume `1` is the user ID, update this dynamically if needed
+                    username, // If username needs to be updated
+                    profilepicture: newProfilePicture, // Push updated profile picture
+                });
+
+                setProfilePicture(newProfilePicture); // Update the profile picture locally
+                alert('Profile picture updated successfully!');
+                navigate('/'); // Redirect back to home
+            } catch (error) {
+                console.error('Failed to update profile picture:', error);
+                alert('Failed to update profile picture');
+            }
         }
     };
 
@@ -38,9 +67,13 @@ const Profile: React.FC = () => {
                 <h2 style={styles.username}>{username}</h2>
                 <input type="file" onChange={handleProfilePictureChange} style={styles.fileInput} />
                 {newProfilePicture && (
-                    <button onClick={handleConfirmChange} style={styles.button}>Confirm Change</button>
+                    <button onClick={handleConfirmChange} style={styles.button}>
+                        Confirm Change
+                    </button>
                 )}
-                <button onClick={handleBackClick} style={styles.backButton}>Back to Home</button>
+                <button onClick={handleBackClick} style={styles.backButton}>
+                    Back to Home
+                </button>
             </div>
         </div>
     );
