@@ -3,6 +3,7 @@ import { TasksService } from './tasks.service';
 import { Tasks } from './entities/task.entity';
 import { CreateTaskDTO } from './dto/create-task.dto';
 import { UpdateTaskDTO } from './dto/update-task.dto';
+import { Public } from 'src/auth/auth.constants';
 
 @Controller('tasks')
 export class TasksController {
@@ -16,6 +17,7 @@ export class TasksController {
     return this.tasksService.createTask(userId, createTaskDto);
   }
 
+  @Public()
   @Get()
   async getTasks(): Promise<Tasks[]> {
     return this.tasksService.getTasks();
