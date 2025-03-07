@@ -8,10 +8,13 @@ import { JwtService } from '@nestjs/jwt';
 import { IS_PUBLIC_KEY, jwtConstants } from './auth.constants';
 import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
+import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService, private reflector: Reflector) {}
+export class JwtAuthGuard extends AuthGuard('jwt') {
+  constructor(private jwtService: JwtService, private reflector: Reflector) {
+    super();
+  }
 
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];

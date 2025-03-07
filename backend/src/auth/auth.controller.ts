@@ -1,8 +1,8 @@
 import { Body, Controller, Post, HttpCode, HttpStatus, UseGuards, Get, Request } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthGuard } from '@nestjs/passport';
 import { Public } from './auth.constants';
 import { Request as ExpressRequest } from 'express';
+import { AuthLocalGuard } from './auth.local.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -18,9 +18,19 @@ export class AuthController {
   @Public()
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(AuthLocalGuard)
   async login(@Request() req: ExpressRequest) {
-    return req.user;
+    return this.authService.login(req.user);
+  }
+
+  @Public()
+  @HttpCode(HttpStatus.OK)
+  @Post('logout')
+  @UseGuards(AuthLocalGuard)
+  async logout(@Request() req: ExpressRequest) {
+    return req.logout((err) => {
+      if (err) return err;
+    });
   }
 
   // @Get('profile')

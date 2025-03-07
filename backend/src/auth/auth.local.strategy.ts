@@ -9,7 +9,6 @@ import { UsersService } from '../modules/users/users.service';
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(
     private authService: AuthService,
-    private usersService: UsersService
 ) {
     super();
   }
