@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Tasks } from './entities/task.entity';
 import { Users } from '../users/entities/user.entity';
-import { TaskDTO } from './dto/task.dto';
 import { CreateTaskDTO } from './dto/create-task.dto';
 import { UpdateTaskDTO } from './dto/update-task.dto';
 
@@ -27,24 +26,15 @@ export class TasksService {
   }
 
   async getTasks(): Promise<Tasks[]> {
-    return this.taskRepository.find({ relations: ['creator'] });
+    return this.taskRepository.find();
   }
 
-  async getTaskById(id: number): Promise<TaskDTO> {
+  async getTaskById(id: number): Promise<Tasks> {
     const task = await this.taskRepository.findOne({ where: { id: id }, relations: ['creator'] });
     if (!task) {
       throw new Error('task not found');
     }
-  
-    return {
-      id: task.id,
-      name: task.name,
-      contents: task.contents,
-      creator: task.creator.id,
-      due_date: task.due_date,
-      status: task.status,
-      priority: task.priority,
-    };
+    return task;
   }
 
   async updateTask(id: number, updateTaskDto: UpdateTaskDTO): Promise<Tasks> {
@@ -65,20 +55,12 @@ export class TasksService {
     return updatedTask;
   }
 
-  async deleteTask(id: number): Promise<TaskDTO> {
+  async deleteTask(id: number): Promise<Tasks> {
     const task = await this.taskRepository.findOne({ where: { id: id }, relations: ['creator'] });
     if (!task) {
       throw new Error('task not found');
     }
     await this.taskRepository.delete(id);
-    return {
-      id: task.id,
-      name: task.name,
-      contents: task.contents,
-      creator: task.creator.id,
-      due_date: task.due_date,
-      status: task.status,
-      priority: task.priority,
-    };
+    return task;
   }
 }

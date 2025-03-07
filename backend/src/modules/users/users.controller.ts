@@ -10,21 +10,37 @@ export class UsersController {
   
   @Post()
     async createUser(@Body() createUserDto: CreateUserDTO) {
-      return await this.usersService.createUser(createUserDto);
+      await this.usersService.createUser(createUserDto);
+      return {
+        success: true,
+        message: 'user created successfully',
+      };
     }
 
   @Get(':id')
   async getUserById(@Param('id') id: number) {
-    return await this.usersService.getUserById(id);
+    await this.usersService.getUserById(id);
+    return {
+      success: true,
+      message: 'user retrived',
+    }
   }
 
   @Put(':id')
   async updateUser(@Param('id') id: number, @Body() updateUserDto: UpdateUserDTO) {
-    return await this.usersService.updateUser(id, updateUserDto);
+    await this.usersService.updateUser(id, updateUserDto);
+    return {
+      success: true,
+      message: 'user updated',
+    };
   }
 
   @Delete(':id')
   async deleteUser(@Param('id') id: number) {
-    return await this.usersService.deleteUser(id);
+    await this.usersService.deleteUser(id);
+    return {
+      success: true,
+      message: 'user deleted',
+    };
   }
 }
