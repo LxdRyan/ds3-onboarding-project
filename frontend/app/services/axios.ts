@@ -12,7 +12,6 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const jwt = sessionStorage.getItem("jwt");
     if (jwt) {
-      console.log("jwt: ", jwt);
       config.headers.Authorization = `Bearer ${jwt}`;
     }
     return config;

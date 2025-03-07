@@ -19,6 +19,7 @@ const UpdateTask: React.FC = () => {
             try {
                 const response = await axiosInstance.get(`/tasks/${taskId}`);
                 const task = response.data;
+                console.log('Task:', task);
 
                 // Populate state variables with task data
                 setTaskContents(task.contents || '');

@@ -12,7 +12,6 @@ const TaskDetails: React.FC = () => {
 
   useEffect(() => {
     const fetchTask = async () => {
-      console.log("jwt: ", jwt)
       try {
         const response = await axiosInstance.get(`/tasks/${taskId}`);
         setTask(response.data);
