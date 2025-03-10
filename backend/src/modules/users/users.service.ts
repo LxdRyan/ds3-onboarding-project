@@ -22,6 +22,18 @@ export class UsersService {
     return user;
   }
 
+  async getUsers(): Promise<UserDTO[]> {
+    const users = await this.userRepository.find();
+    return users.map((user) => ({
+      id: user.id,
+      name: user.name,
+      username: user.username,
+      profile_picture: user.profile_picture
+        ? `data:image/png;base64,${user.profile_picture.toString('base64')}`
+        : null,
+    }));
+  }
+
   async getUserById(id: number): Promise<UserDTO | null> {
     const user = await this.userRepository.findOne({ where: { id: id } });
 

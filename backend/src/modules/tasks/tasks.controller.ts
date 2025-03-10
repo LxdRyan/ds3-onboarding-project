@@ -9,11 +9,9 @@ import { Public } from 'src/auth/auth.constants';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
-  // @Post(':userId')
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async createTask(
-    // @Param('userId') userId: number,
     @Body() createTaskDto: CreateTaskDTO,
   ): Promise<{ success: boolean, contents: CreateTaskDTO }> {
     return {
@@ -32,10 +30,10 @@ export class TasksController {
   }
 
   @Get(':id')
-  async getTaskById(@Param('id') id: number): Promise<{ success: boolean, data: Tasks }> {
+  async getTaskById(@Param('id') id: number): Promise<{ success: boolean, contents: Tasks }> {
     return {
       success: true,
-      data: await this.tasksService.getTaskById(id),
+      contents: await this.tasksService.getTaskById(id),
     };
   }
 
@@ -43,18 +41,18 @@ export class TasksController {
   async updateTask(
     @Param('id') id: number,
     @Body() updateTaskDto: UpdateTaskDTO,
-  ): Promise<{ success: boolean, data: Tasks }> {
+  ): Promise<{ success: boolean, contents: Tasks }> {
     return {
       success: true,
-      data: await this.tasksService.updateTask(id, updateTaskDto),
+      contents: await this.tasksService.updateTask(id, updateTaskDto),
     };
   }
 
   @Delete(':id')
-  async deleteTask(@Param('id') id: number): Promise<{ success: boolean, data: Tasks }> {
+  async deleteTask(@Param('id') id: number): Promise<{ success: boolean, contents: Tasks }> {
     return {
       success: true,
-      data: await this.tasksService.deleteTask(id),
+      contents: await this.tasksService.deleteTask(id),
     };
   }
 }

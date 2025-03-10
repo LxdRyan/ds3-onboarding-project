@@ -19,6 +19,15 @@ export class UsersController {
     };
   }
 
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  async getUsers() {
+    return {
+      success: true,
+      data: await this.usersService.getUsers(),
+    };
+  }
+
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   async getUserById(@Param('id') id: number) {

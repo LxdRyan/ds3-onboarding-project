@@ -15,21 +15,13 @@ export class TasksService {
     private readonly userRepository: Repository<Users>,
   ) {}
 
-  // async createTask(userId: number, createTaskDto: CreateTaskDTO): Promise<Tasks> {
   async createTask(createTaskDto: CreateTaskDTO): Promise<Tasks> {
     try {
-      // const user = await this.userRepository.findOne({ where: { id: userId } });
-      // if (!user) {
-      //   throw new Error('user not found');
-      // }
-
-      // const task = this.taskRepository.create({ ...createTaskDto, creator_id: user.id });
       const task = this.taskRepository.create(createTaskDto);
       await this.taskRepository.save(task);
       return task;
     } catch (error) {
       throw error;
-      // return error;
     }
   }
 
@@ -46,16 +38,9 @@ export class TasksService {
   }
 
   async updateTask(id: number, updateTaskDto: UpdateTaskDTO): Promise<Tasks> {
-    const { creator_id: creatorId, ...taskData } = updateTaskDto;
-    if (creatorId) {
-      const creator = await this.userRepository.findOne({ where: { id: creatorId } });
-      if (!creator) {
-        throw new Error('creator not found');
-      }
-      await this.taskRepository.update(id, { ...taskData });
-    } else {
-      await this.taskRepository.update(id, { ...taskData });
-    }
+    const taskData = updateTaskDto;
+    await this.taskRepository.update(id, { ...taskData });
+    
     const updatedTask = await this.taskRepository.findOne({ where: { id: id } });
     if (!updatedTask) {
       throw new Error('task not found');

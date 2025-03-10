@@ -22,7 +22,8 @@ const TaskDetails: React.FC = () => {
     const fetchTask = async () => {
       try {
         const response = await axiosInstance.get(`/tasks/${taskId}`);
-        setTask(response.data);
+        setTask(response.data.contents);
+        console.log(response.data.contents);
       } catch (error) {
         console.error("Failed to fetch task:", error);
       }
@@ -39,13 +40,13 @@ const TaskDetails: React.FC = () => {
     navigate("/home");
   };
 
-  if (!task) {
-    return (
-      <Container className="text-center py-5">
-        <h4>Loading...</h4>
-      </Container>
-    );
-  }
+  // if (!task) {
+  //   return (
+  //     <Container className="text-center py-5">
+  //       <h4>Loading...</h4>
+  //     </Container>
+  //   );
+  // }
 
   return (
     <Container fluid className="py-4">
@@ -53,21 +54,12 @@ const TaskDetails: React.FC = () => {
       <Container>
         <Row className="mb-4">
           <Col>
-            <h1>{task.name}</h1>
+            <h1>{task?.name}</h1>
           </Col>
         </Row>
         <Row>
           <Col md={8}>
-            <p>{task.contents}</p>
-          </Col>
-          <Col md={4} className="text-center">
-            {/* <Image
-              src="green_square.svg"
-              alt="Task Indicator"
-              width="50"
-              height="50"
-              className="mb-2"
-            /> */}
+            <p>{task?.contents}</p>
           </Col>
         </Row>
         <Row className="mt-4">

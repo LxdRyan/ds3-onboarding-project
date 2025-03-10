@@ -13,10 +13,6 @@ export class UpdateTaskDTO {
   @IsOptional()
   contents: string;
 
-  @IsNumber()
-  @IsOptional()
-  creator_id: number;
-
   @IsDate()
   @IsOptional()
   due_date: Date;
