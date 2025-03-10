@@ -27,7 +27,7 @@ const Home: React.FC = () => {
     const fetchTasks = async () => {
       try {
         const response = await axiosInstance.get('/tasks'); // Ensure the response is typed
-        setTasks(response.data.data);
+        setTasks(response.data.contents);
       } catch (error) {
         console.error('Failed to fetch tasks:', error);
       }

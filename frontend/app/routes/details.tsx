@@ -16,7 +16,7 @@ const TaskDetails: React.FC = () => {
     const fetchTask = async () => {
       try {
         const response = await axiosInstance.get(`/tasks/${taskId}`);
-        setTask(response.data);
+        setTask(response.data.contents);
       } catch (error) {
         console.error('Failed to fetch task:', error);
       }
@@ -33,9 +33,9 @@ const TaskDetails: React.FC = () => {
     navigate('/home');
   }
 
-  if (!task) {
-    return <div>Loading...</div>;
-  }
+  // if (!task) {
+  //   return <div>Loading...</div>;
+  // }
 
   // return (
   //   <div className="task-details">

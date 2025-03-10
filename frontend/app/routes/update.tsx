@@ -29,7 +29,7 @@ const UpdateTask: React.FC = () => {
     const fetchTaskDetails = async () => {
       try {
         const response = await axiosInstance.get(`/tasks/${taskId}`);
-        const task = response.data;
+        const task = response.data.contents;
         const date = extractDate(task.due_date);
 
         // Populate state variables with task data

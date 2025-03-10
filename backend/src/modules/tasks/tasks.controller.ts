@@ -15,19 +15,19 @@ export class TasksController {
   async createTask(
     // @Param('userId') userId: number,
     @Body() createTaskDto: CreateTaskDTO,
-  ): Promise<{ success: boolean, data: CreateTaskDTO }> {
+  ): Promise<{ success: boolean, contents: CreateTaskDTO }> {
     return {
       success: true,
-      data: await this.tasksService.createTask(createTaskDto),
+      contents: await this.tasksService.createTask(createTaskDto),
     };
   }
 
   @Public()
   @Get()
-  async getTasks(): Promise<{ success: boolean, data: Tasks[]}> {
+  async getTasks(): Promise<{ success: boolean, contents: Tasks[]}> {
     return {
       success: true,
-      data: await this.tasksService.getTasks(),
+      contents: await this.tasksService.getTasks(),
     };
   }
 

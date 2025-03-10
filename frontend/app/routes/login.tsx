@@ -26,7 +26,7 @@ const LoginPage: React.FC = () => {
       if (response.data.success) {
         console.log("Login Successful:", response.data);
         alert("Login successful!");
-        navigate("/"); // Navigate to the homepage
+        navigate("/home"); // Navigate to the homepage
       } else {
         alert("Invalid username or password");
       }
