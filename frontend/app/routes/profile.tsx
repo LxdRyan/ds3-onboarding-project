@@ -25,9 +25,9 @@ const Profile: React.FC = () => {
         fetchUserData();
     }, []);
 
-    const handleProfilePictureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
+    const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
             const reader = new FileReader();
             reader.onloadend = () => {
                 setNewProfilePicture(reader.result as string); // Temporarily update new profile picture
