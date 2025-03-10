@@ -52,13 +52,13 @@ const TaskDetails: React.FC = () => {
             <p>{task.contents}</p>
           </Col>
           <Col md={4} className="text-center">
-            <Image
+            {/* <Image
               src="green_square.svg"
               alt="Task Indicator"
               width="50"
               height="50"
               className="mb-2"
-            />
+            /> */}
           </Col>
         </Row>
         <Row className="mt-4">
