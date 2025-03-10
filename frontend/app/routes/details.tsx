@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Navbar, Nav, Dropdown, Button } from "react-bootstrap";
 import axiosInstance from '~/services/axios';
+import "./details.css";
 
 
 
