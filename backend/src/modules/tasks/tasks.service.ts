@@ -15,14 +15,16 @@ export class TasksService {
     private readonly userRepository: Repository<Users>,
   ) {}
 
-  async createTask(userId: number, createTaskDto: CreateTaskDTO): Promise<Tasks> {
+  // async createTask(userId: number, createTaskDto: CreateTaskDTO): Promise<Tasks> {
+  async createTask(createTaskDto: CreateTaskDTO): Promise<Tasks> {
     try {
-      const user = await this.userRepository.findOne({ where: { id: userId } });
-      if (!user) {
-        throw new Error('user not found');
-      }
+      // const user = await this.userRepository.findOne({ where: { id: userId } });
+      // if (!user) {
+      //   throw new Error('user not found');
+      // }
 
-      const task = this.taskRepository.create({ ...createTaskDto, creator_id: user.id });
+      // const task = this.taskRepository.create({ ...createTaskDto, creator_id: user.id });
+      const task = this.taskRepository.create(createTaskDto);
       await this.taskRepository.save(task);
       return task;
     } catch (error) {

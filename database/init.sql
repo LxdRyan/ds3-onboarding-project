@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS USERS (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
-    username VARCHAR(100),
+    username VARCHAR(100) UNIQUE,
     password VARCHAR(160),
     profile_picture TEXT
 );
