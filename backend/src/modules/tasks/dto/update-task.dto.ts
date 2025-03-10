@@ -15,7 +15,7 @@ export class UpdateTaskDTO {
 
   @IsNumber()
   @IsOptional()
-  creator: number;
+  creator_id: number;
 
   @IsDate()
   @IsOptional()

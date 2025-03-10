@@ -39,4 +39,12 @@ export class TasksController {
   ): Promise<Tasks> {
     return this.tasksService.updateTask(id, updateTaskDto);
   }
+
+  @Delete(':id')
+  async deleteTask(@Param('id') id: number): Promise<{ success: boolean, data: Tasks }> {
+    return {
+      success: true,
+      data: await this.tasksService.deleteTask(id),
+    };
+  }
 }
