@@ -60,7 +60,7 @@ const UpdateTask: React.FC = () => {
 
       await axiosInstance.put(`/tasks/${taskId}`, updatedTask);
       alert("Task updated successfully");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.error("Failed to update task:", error);
       alert("Failed to update task");
@@ -71,7 +71,7 @@ const UpdateTask: React.FC = () => {
     try {
       await axiosInstance.delete(`/tasks/${taskId}`);
       alert("Task deleted successfully");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.error("Failed to delete task:", error);
       alert("Failed to delete task");

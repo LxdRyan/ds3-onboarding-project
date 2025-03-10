@@ -28,7 +28,7 @@ const TaskDetails: React.FC = () => {
   }
 
   const handleBack = () => {
-    navigate('/');
+    navigate('/home');
   }
 
   if (!task) {

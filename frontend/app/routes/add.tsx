@@ -28,11 +28,11 @@ const AddTask: React.FC = () => {
 
     axiosInstance.post("/tasks", newTask);
     alert("Task added successfully!");
-    navigate("/");
+    navigate("/home");
   };
 
   const handleBack = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   return (

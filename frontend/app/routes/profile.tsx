@@ -56,7 +56,7 @@ const Profile: React.FC = () => {
     };
 
     const handleBackClick = () => {
-        navigate('/');
+        navigate('/home');
     };
 
     return (
