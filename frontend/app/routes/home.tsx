@@ -15,16 +15,16 @@ const Home: React.FC = () => {
   ]);
 
   useEffect(() => {
-    // Uncomment to fetch tasks from API
-    // const fetchTasks = async () => {
-    //   try {
-    //     const response = await axiosInstance.get('/tasks');
-    //     setTasks(response.data);
-    //   } catch (error) {
-    //     console.error('Failed to fetch tasks:', error);
-    //   }
-    // };
-    // fetchTasks();
+    //Uncomment to fetch tasks from API
+    const fetchTasks = async () => {
+      try {
+        const response = await axiosInstance.get('/tasks');
+        setTasks(response.data);
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
+      }
+    };
+    fetchTasks();
   }, []);
 
   const handleNavigation = (path: string) => {
