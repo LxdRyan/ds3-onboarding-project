@@ -5,20 +5,28 @@ import { Container, Row, Col, Navbar, Nav, Dropdown, Button } from "react-bootst
 import "./home.css"; // Custom styles if needed
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// Define the Task interface
+interface Task {
+  id: number;
+  name: string;
+  contents: string;
+  priority: string; // High, Medium, or Low
+  owner: string;
+  dueDate: string;
+  status: string; // e.g., "Completed", "In Progress"
+}
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const [tasks, setTasks] = useState([
-    { id: 1, title: "Task 1", owner: "John", dueDate: "2025-03-10", priority: "High", status: "Completed" },
-    { id: 2, title: "Task 2", owner: "Jane", dueDate: "2025-03-12", priority: "Medium", status: "In Progress" },
-    { id: 3, title: "Task 3", owner: "Alice", dueDate: "2025-03-15", priority: "Low", status: "Not Started" },
-  ]);
+  
+  // Explicitly type the state as Task[]
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    //Uncomment to fetch tasks from API
+    // Fetch tasks from API
     const fetchTasks = async () => {
       try {
-        const response = await axiosInstance.get('/tasks');
+        const response = await axiosInstance.get<Task[]>('/tasks'); // Ensure the response is typed
         setTasks(response.data);
       } catch (error) {
         console.error('Failed to fetch tasks:', error);
@@ -36,14 +44,19 @@ const Home: React.FC = () => {
   };
 
   const renderTasksByPriority = (priority: string) => {
-    const filteredTasks = tasks.filter((task) => task.priority === priority);
+    const filteredTasks = tasks.filter((task) => task.priority === priority); // Filter tasks by priority
     return filteredTasks.map((task) => (
       <Row key={task.id} className="align-items-center py-2 border-bottom">
         <Col xs={1}>
           <img src="grey_square.svg" alt="Indicator" width="30" height="30" />
         </Col>
-        <Col xs={3} className="task-title" style={{ cursor: "pointer" }} onClick={() => handleTaskClick(task.id)}>
-          <strong>{task.title}</strong>
+        <Col
+          xs={3}
+          className="task-title"
+          style={{ cursor: "pointer" }}
+          onClick={() => handleTaskClick(task.id)}
+        >
+          <strong>{task.name}</strong>
         </Col>
         <Col xs={2}>{task.owner}</Col>
         <Col xs={2}>{task.dueDate}</Col>
@@ -73,10 +86,17 @@ const Home: React.FC = () => {
             <img src="black_square.svg" alt="Logo" width="30" height="30" />
           </Navbar.Brand>
           <Nav className="ms-auto">
-            <Button variant="outline-primary" className="me-2" onClick={() => handleNavigation("/profile")}>
+            <Button
+              variant="outline-primary"
+              className="me-2"
+              onClick={() => handleNavigation("/profile")}
+            >
               Profile
             </Button>
-            <Button variant="primary" onClick={() => handleNavigation("/login")}>
+            <Button
+              variant="primary"
+              onClick={() => handleNavigation("/login")}
+            >
               Sign Out
             </Button>
           </Nav>
@@ -106,8 +126,10 @@ const Home: React.FC = () => {
         </section>
       </Container>
 
-      
-      <Button variant="outline-secondary" onClick={() => handleNavigation("/add")}>
+      <Button
+        variant="outline-secondary"
+        onClick={() => handleNavigation("/add")}
+      >
         Add Task
       </Button>
     </Container>
