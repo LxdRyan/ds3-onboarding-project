@@ -25,6 +25,11 @@ export class Users {
   @Column({ type: 'bytea', nullable: true })
   profile_picture: Buffer | null;
 
+  @BeforeInsert()
+  convertProfilePicture() {
+    this.profile_picture = this.profile_picture ? Buffer.from(this.profile_picture.toString(), 'base64') : null;
+  }
+
   // @OneToMany(() => Tasks, (task) => task.creator)
   // tasks: Tasks[];
 

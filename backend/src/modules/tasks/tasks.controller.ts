@@ -9,35 +9,45 @@ import { Public } from 'src/auth/auth.constants';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
-  @Post(':userId')
+  // @Post(':userId')
+  @Post()
   @HttpCode(HttpStatus.CREATED)
   async createTask(
-    @Param('userId') userId: number,
+    // @Param('userId') userId: number,
     @Body() createTaskDto: CreateTaskDTO,
   ): Promise<{ success: boolean, data: CreateTaskDTO }> {
     return {
       success: true,
-      data: await this.tasksService.createTask(userId, createTaskDto),
+      data: await this.tasksService.createTask(createTaskDto),
     };
   }
 
   @Public()
   @Get()
-  async getTasks(): Promise<Tasks[]> {
-    return this.tasksService.getTasks();
+  async getTasks(): Promise<{ success: boolean, data: Tasks[]}> {
+    return {
+      success: true,
+      data: await this.tasksService.getTasks(),
+    };
   }
 
   @Get(':id')
-  async getTaskById(@Param('id') id: number): Promise<Tasks> {
-    return this.tasksService.getTaskById(id);
+  async getTaskById(@Param('id') id: number): Promise<{ success: boolean, data: Tasks }> {
+    return {
+      success: true,
+      data: await this.tasksService.getTaskById(id),
+    };
   }
 
   @Put(':id')
   async updateTask(
     @Param('id') id: number,
     @Body() updateTaskDto: UpdateTaskDTO,
-  ): Promise<Tasks> {
-    return this.tasksService.updateTask(id, updateTaskDto);
+  ): Promise<{ success: boolean, data: Tasks }> {
+    return {
+      success: true,
+      data: await this.tasksService.updateTask(id, updateTaskDto),
+    };
   }
 
   @Delete(':id')

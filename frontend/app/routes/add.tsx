@@ -5,10 +5,10 @@ import axiosInstance from "../services/axios";
 import Button from "../services/Button";
 
 const AddTask: React.FC = () => {
-  const [taskName, setTaskName] = useState("");
-  const [taskContents, setTaskContents] = useState("");
-  const [creator, setCreator] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  const [name, setName] = useState("");
+  const [contents, setContents] = useState("");
+  const [creator_id, setCreatorID] = useState("");
+  const [due_date, setDueDate] = useState("");
   const [status, setStatus] = useState("");
   const [priority, setPriority] = useState("");
 
@@ -17,10 +17,10 @@ const AddTask: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newTask = {
-      taskName,
-      taskContents,
-      creator,
-      dueDate,
+      name,
+      contents,
+      creator_id,
+      due_date,
       status,
       priority,
     };
@@ -28,11 +28,11 @@ const AddTask: React.FC = () => {
 
     axiosInstance.post("/tasks", newTask);
     alert("Task added successfully!");
-    navigate("/");
+    navigate("/home");
   };
 
   const handleBack = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   return (
@@ -45,8 +45,8 @@ const AddTask: React.FC = () => {
             className="input100"
             type="text"
             placeholder="Task Name"
-            value={taskName}
-            onChange={(e) => setTaskName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
           <span className="focus-input100"></span>
@@ -56,8 +56,8 @@ const AddTask: React.FC = () => {
           <textarea
             className="input100"
             placeholder="Task Contents"
-            value={taskContents}
-            onChange={(e) => setTaskContents(e.target.value)}
+            value={contents}
+            onChange={(e) => setContents(e.target.value)}
             required
           />
           <span className="focus-input100"></span>
@@ -68,8 +68,8 @@ const AddTask: React.FC = () => {
             className="input100"
             type="text"
             placeholder="Creator"
-            value={creator}
-            onChange={(e) => setCreator(e.target.value)}
+            value={creator_id}
+            onChange={(e) => setCreatorID(e.target.value)}
             required
           />
           <span className="focus-input100"></span>
@@ -79,7 +79,7 @@ const AddTask: React.FC = () => {
           <input
             className="input100"
             type="date"
-            value={dueDate}
+            value={due_date}
             onChange={(e) => setDueDate(e.target.value)}
             required
           />
