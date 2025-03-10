@@ -15,11 +15,8 @@ export class TasksController {
   async createTask(
     // @Param('userId') userId: number,
     @Body() createTaskDto: CreateTaskDTO,
-  ): Promise<{ success: boolean, data: CreateTaskDTO }> {
-    return {
-      success: true,
-      data: await this.tasksService.createTask(createTaskDto),
-    };
+  ): Promise<CreateTaskDTO> {
+    return await this.tasksService.createTask(createTaskDto);
   }
 
   @Public()
