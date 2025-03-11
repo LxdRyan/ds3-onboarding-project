@@ -115,8 +115,8 @@ Each tier builds upon the previous one, creating a clear path to follow.
 - [x] Set up a database component (can be a simple JSON file to start)
 - [x] Create API endpoints in the backend for basic CRUD operations
 - [x] Connect the frontend to the backend API
-- [ ] Implement task creation and viewing in the UI
-- [ ] Implement task completion toggling and deletion
+- [x] Implement task creation and viewing in the UI
+- [x] Implement task completion toggling and deletion
 - [ ] Create feature branches for different components/functionality
 - [x] Set up Docker Compose to run all components together
 - [ ] Update README with basic setup instructions
@@ -143,12 +143,12 @@ Each tier builds upon the previous one, creating a clear path to follow.
 **Mission**: Extend the application with advanced features across all components.
 
 **Checkpoints**:
-- [ ] Implement priority levels for tasks (UI + API + database schema)
+- [x] Implement priority levels for tasks (UI + API + database schema)
 - [ ] Add due dates with visual indicators
 - [ ] Create task categories or tags
 - [ ] Implement bulk actions (delete completed, mark all as complete)
 - [ ] Add real-time updates between users (e.g., WebSockets)
-- [ ] Implement proper API authentication/security
+- [x] Implement proper API authentication/security
 - [ ] Optimize Docker for production (multi-stage builds, environment variables)
 - [ ] Add automated tests for frontend and backend components
 - [ ] Implement database migrations or schema versioning
@@ -159,7 +159,7 @@ Each tier builds upon the previous one, creating a clear path to follow.
 **Mission**: Transform the project into a production-ready application.
 
 **Checkpoints**:
-- [ ] Implement user accounts or session management
+- [x] Implement user accounts or session management
 - [ ] Add collaborative features (assigned tasks, comments)
 - [ ] Create a responsive design that works on different screen sizes
 - [ ] Implement keyboard shortcuts and accessibility features
