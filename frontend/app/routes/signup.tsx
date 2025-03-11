@@ -10,10 +10,7 @@ const SignUpPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [profilePicture, setProfilePicture] = useState<File | null>(null);
-  const [profilePictureUrl, setProfilePictureUrl] = useState<string | null>(
-    null
-  );
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -30,9 +27,7 @@ const SignUpPage: React.FC = () => {
     formData.append("name", name);
     formData.append("username", username);
     formData.append("password", password);
-    if (profilePicture) {
-      formData.append("profilePicture", profilePicture);
-    }
+
 
     try {
       const response = await axiosInstance.post("/users", formData);
@@ -50,13 +45,6 @@ const SignUpPage: React.FC = () => {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setProfilePicture(file);
-      setProfilePictureUrl(URL.createObjectURL(file));
-    }
-  };
 
   return (
     <div className="limiter">
@@ -146,31 +134,6 @@ const SignUpPage: React.FC = () => {
             </div>
 
             {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-
-            <div
-              className="wrap-input100"
-              style={{ marginBottom: "20px", textAlign: "center" }}
-            >
-              <label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  style={{
-                    display: "block",
-                    margin: "10px auto",
-                    padding: "8px",
-                  }}
-                />
-                {profilePictureUrl && (
-                  <img
-                    src={profilePictureUrl}
-                    alt="Profile Preview"
-                    style={{ width: "50%", borderRadius: "50%" }}
-                  />
-                )}
-              </label>
-            </div>
 
             <div className="container-login100-form-btn">
               <button type="submit" className="login100-form-btn">
