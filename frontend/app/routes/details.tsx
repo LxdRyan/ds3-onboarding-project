@@ -57,7 +57,7 @@ const TaskDetails: React.FC = () => {
   // }
 
   return (
-    <Container fluid className="py-4">
+    <Container className="py-4">
       <Navbar bg="light" className="mb-4 border-bottom">
               <Container>
                 <Navbar.Brand href="/">
