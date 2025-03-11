@@ -48,7 +48,9 @@ const Home: React.FC = () => {
     return filteredTasks.map((task) => (
       <Row key={task.id} className="align-items-center py-2 border-bottom">
         <Col xs={1}>
-          <img src="grey_square.svg" alt="Indicator" width="30" height="30" />
+          <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="30" height="30" fill="grey" />
+          </svg>
         </Col>
         <Col
           xs={3}
@@ -82,7 +84,9 @@ const Home: React.FC = () => {
       <Navbar bg="light" className="mb-4 border-bottom">
         <Container>
           <Navbar.Brand href="/home">
-            <img src="black_square.svg" alt="Logo" width="30" height="30" />
+            <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="30" height="30" fill="black" />
+            </svg>
           </Navbar.Brand>
           <Nav className="ms-auto">
             <Button

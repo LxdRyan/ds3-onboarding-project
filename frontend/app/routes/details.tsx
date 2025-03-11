@@ -59,20 +59,22 @@ const TaskDetails: React.FC = () => {
   return (
     <Container className="py-4">
       <Navbar bg="light" className="mb-4 border-bottom">
-              <Container>
-                <Navbar.Brand href="/home">
-                  <img src="black_square.svg" alt="Logo" width="30" height="30" />
-                </Navbar.Brand>
-                <Nav className="ms-auto">
-                  <Button
-                    variant="primary"
-                    onClick={() => handleNavigation("/")}
-                  >
-                    Sign Out
-                  </Button>
-                </Nav>
-              </Container>
-            </Navbar>
+        <Container>
+          <Navbar.Brand href="/home">
+            <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="30" height="30" fill="black" />
+            </svg>
+          </Navbar.Brand>
+          <Nav className="ms-auto">
+            <Button
+              variant="primary"
+              onClick={() => handleNavigation("/")}
+            >
+              Sign Out
+            </Button>
+          </Nav>
+        </Container>
+      </Navbar>
       <Container>
         <Row className="mb-4">
           <Col>
