@@ -125,7 +125,7 @@ const AddTask: React.FC = () => {
             required
           >
             <option value="">Select Status</option>
-            <option value="Pending">Not Started</option>
+            <option value="Not Started">Not Started</option>
             <option value="In Progress">In Progress</option>
             <option value="Completed">Completed</option>
           </select>
