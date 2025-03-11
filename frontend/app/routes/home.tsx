@@ -68,7 +68,6 @@ const Home: React.FC = () => {
             <Dropdown.Menu>
               <Dropdown.Item>Completed</Dropdown.Item>
               <Dropdown.Item>In Progress</Dropdown.Item>
-              <Dropdown.Item>Pending Dependency</Dropdown.Item>
               <Dropdown.Item>Not Started</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -88,7 +87,7 @@ const Home: React.FC = () => {
           <Nav className="ms-auto">
             <Button
               variant="primary"
-              onClick={() => handleNavigation("/login")}
+              onClick={() => handleNavigation("/")}
             >
               Sign Out
             </Button>

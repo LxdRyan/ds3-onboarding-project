@@ -66,7 +66,7 @@ const TaskDetails: React.FC = () => {
                 <Nav className="ms-auto">
                   <Button
                     variant="primary"
-                    onClick={() => handleNavigation("/login")}
+                    onClick={() => handleNavigation("/")}
                   >
                     Sign Out
                   </Button>
