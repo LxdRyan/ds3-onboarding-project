@@ -60,7 +60,7 @@ const TaskDetails: React.FC = () => {
     <Container className="py-4">
       <Navbar bg="light" className="mb-4 border-bottom">
               <Container>
-                <Navbar.Brand href="/">
+                <Navbar.Brand href="/home">
                   <img src="black_square.svg" alt="Logo" width="30" height="30" />
                 </Navbar.Brand>
                 <Nav className="ms-auto">

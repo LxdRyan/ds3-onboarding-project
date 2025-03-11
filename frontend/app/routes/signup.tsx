@@ -6,6 +6,7 @@ import "./css/util.css";
 import "./css/main.css";
 
 const SignUpPage: React.FC = () => {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -26,6 +27,7 @@ const SignUpPage: React.FC = () => {
     setError("");
 
     const formData = new FormData();
+    formData.append("name", name);
     formData.append("username", username);
     formData.append("password", password);
     if (profilePicture) {
@@ -38,7 +40,7 @@ const SignUpPage: React.FC = () => {
       if (response.data.success) {
         console.log("Sign-Up Successful:", response.data);
         alert("Sign-Up successful!");
-        navigate("/login");
+        navigate("/");
       } else {
         setError(response.data.message || "Sign-Up failed");
       }
@@ -66,6 +68,25 @@ const SignUpPage: React.FC = () => {
 
           <form className="login100-form validate-form" onSubmit={handleSubmit}>
             <span className="login100-form-title">Sign Up</span>
+
+            <div
+              className="wrap-input100 validate-input"
+              data-validate="Username is required"
+            >
+              <input
+                className="input100"
+                type="text"
+                name="name"
+                placeholder="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <span className="focus-input100"></span>
+              <span className="symbol-input100">
+                <i className="fa fa-user" aria-hidden="true"></i>
+              </span>
+            </div>
 
             <div
               className="wrap-input100 validate-input"
