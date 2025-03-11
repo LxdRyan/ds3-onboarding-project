@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../services/LayoutAdd";
 import axiosInstance from "../services/axios";
 import Button from "../services/Button";
+
+interface User {
+  id: string;
+  name: string;
+}
 
 const AddTask: React.FC = () => {
   const [name, setName] = useState("");
@@ -11,24 +16,43 @@ const AddTask: React.FC = () => {
   const [due_date, setDueDate] = useState("");
   const [status, setStatus] = useState("");
   const [priority, setPriority] = useState("");
+  const [users, setUsers] = useState<User[]>([]); // Define users as an array of User objects
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Fetch users from API when the component mounts
+    const fetchUsers = async () => {
+      try {
+        const response = await axiosInstance.get("/users");
+        setUsers(response.data.contents); // Assuming response.data is an array of user objects
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newTask = {
       name,
       contents,
-      creator_id,
+      creator_id, // Save the selected creator_id
       due_date,
       status,
       priority,
     };
-    console.log("New Task:", newTask);
 
-    axiosInstance.post("/tasks", newTask);
-    alert("Task added successfully!");
-    navigate("/home");
+    try {
+      await axiosInstance.post("/tasks", newTask);
+      alert("Task added successfully!");
+      navigate("/home");
+    } catch (error) {
+      console.error("Failed to add task:", error);
+      alert("Failed to add the task.");
+    }
   };
 
   const handleBack = () => {
@@ -63,15 +87,20 @@ const AddTask: React.FC = () => {
           <span className="focus-input100"></span>
         </div>
 
-        <div className="wrap-input100 validate-input" data-validate="Creator Name is required">
-          <input
+        <div className="wrap-input100 validate-input" data-validate="Creator is required">
+          <select
             className="input100"
-            type="text"
-            placeholder="Creator"
             value={creator_id}
             onChange={(e) => setCreatorID(e.target.value)}
             required
-          />
+          >
+            <option value="">Select Creator</option>
+            {users.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
+          </select>
           <span className="focus-input100"></span>
         </div>
 
@@ -118,7 +147,7 @@ const AddTask: React.FC = () => {
 
         <div className="container-login100-form-btn">
           <Button label="Add Task" onClick={handleSubmit} />
-          <span style={{margin:'20px'}}></span>
+          <span style={{ margin: "20px" }}></span>
           <Button label="Back" onClick={handleBack} className="btn-secondary" />
         </div>
       </form>
