@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, Row, Col, Navbar, Nav, Dropdown, Button } from "react-bootstrap";
+import { Container, Row, Col, Navbar, Nav, Dropdown, Button, } from "react-bootstrap";
 import axiosInstance from '~/services/axios';
+import "./details.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 interface Task {
   id: number;
@@ -12,6 +15,7 @@ interface Task {
   dueDate: string;
   status: string; // e.g., "Completed", "In Progress"
 }
+
 
 const TaskDetails: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
@@ -40,6 +44,10 @@ const TaskDetails: React.FC = () => {
     navigate("/home");
   };
 
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
   // if (!task) {
   //   return (
   //     <Container className="text-center py-5">
@@ -50,7 +58,28 @@ const TaskDetails: React.FC = () => {
 
   return (
     <Container fluid className="py-4">
-
+      <Navbar bg="light" className="mb-4 border-bottom">
+              <Container>
+                <Navbar.Brand href="/">
+                  <img src="black_square.svg" alt="Logo" width="30" height="30" />
+                </Navbar.Brand>
+                <Nav className="ms-auto">
+                  <Button
+                    variant="outline-primary"
+                    className="me-2"
+                    onClick={() => handleNavigation("/profile")}
+                  >
+                    Profile
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => handleNavigation("/login")}
+                  >
+                    Sign Out
+                  </Button>
+                </Nav>
+              </Container>
+            </Navbar>
       <Container>
         <Row className="mb-4">
           <Col>
