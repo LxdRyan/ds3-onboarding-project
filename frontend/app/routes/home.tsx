@@ -87,13 +87,6 @@ const Home: React.FC = () => {
           </Navbar.Brand>
           <Nav className="ms-auto">
             <Button
-              variant="outline-primary"
-              className="me-2"
-              onClick={() => handleNavigation("/profile")}
-            >
-              Profile
-            </Button>
-            <Button
               variant="primary"
               onClick={() => handleNavigation("/login")}
             >

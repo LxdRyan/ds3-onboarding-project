@@ -7,6 +7,7 @@ import Button from "../services/Button";
 interface User {
   id: string;
   name: string;
+  username: string;
 }
 
 const AddTask: React.FC = () => {
