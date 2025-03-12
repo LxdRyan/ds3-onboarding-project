@@ -49,17 +49,10 @@ const Home: React.FC = () => {
     navigate(`/task/${taskId}`);
   };
 
-  const handleUpdate = async (taskId: number) => {
+  const handleUpdate = async (taskId: number,updatedTask:Task) => {
     try {
-      const updatedTask = {
-        contents: taskContents,
-        name,
-        due_date,
-        status,
-        priority,
-      };
-      console.log("updating")
-      console.log(updatedTask)
+      console.log("updating");
+      console.log(updatedTask);
       await axiosInstance.put(`/tasks/${taskId}`, updatedTask);
       alert("Task updated successfully");
       navigate("/home");
@@ -69,14 +62,20 @@ const Home: React.FC = () => {
     }
   };
 
-  const handleStatusChange = (task: Task, newStatus: string) => {
-    setStatus(newStatus);
-    setName(task.name);
-    setTaskContents(task.contents);
-    setDueDate(task.dueDate);
-    setPriority(task.priority);
-    handleUpdate(task.id);
-  };
+  const handleStatusChange = async (task: Task, newStatus: string) => {
+      const updatedTask: Task = {
+        id: task.id,
+        contents: task.contents,
+        name: task.name,
+        dueDate: task.dueDate,
+        status: newStatus,
+        priority: task.priority,
+        owner: task.owner,
+      };
+    
+      await handleUpdate(task.id, updatedTask);
+    };
+  
 
   const handleIndicator = (status: string) => {
     if (status == "Completed") {
