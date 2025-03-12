@@ -36,13 +36,14 @@ const Home: React.FC = () => {
     fetchTasks();
   }, []);
 
+  const [user, setUser] = useState("");
 
   const fetchUsers = async (id: number) => {
     try{
       const usersResponse = await axiosInstance.get(`/users/${id}`)
       setUser = usersResponse.data.contents.username
       console.log(usersResponse.data.contents.username)
-      return(usersResponse.data.contents.username)
+      // return(usersResponse.data.contents.username)
     } catch (error) {
       console.log("whoops")
       console.error("Failed to get users", error)
@@ -50,37 +51,38 @@ const Home: React.FC = () => {
   }
 
 
-  const getUsername = (id:number) =>{
-    const [user, setUser] = useState("");
-    const fetchUsers = async (id: number) => {
-      try{
-        const usersResponse = await axiosInstance.get(`/users/${id}`)
-        setUser = usersResponse.data.contents.username
-        console.log(usersResponse.data.contents.username)
-        // return(usersResponse.data.contents.username)
-      } catch (error) {
-        console.log("whoops")
-        console.error("Failed to get users", error)
-      }
-    }
-    console.log(user)
-    const usernameOut = user
-    return usernameOut
-  }
-  // const getUsername = (id: number) => {
-  //   const [user, setUser] = useState("");
+  // const getUsername = (id:number) =>{
+  //   // const [user, setUser] = useState("");
   //   useEffect(() => {
   //     const fetchUsers = async (id: number) => {
   //       try{
-  //         setUser = await axiosInstance.get(`/users/${id}`)
-  //         console.log(usersResponse)
+  //         setUser = await axiosInstance.get(`/users/${id}`);
+  //         console.log(user);
   //       } catch (error) {
-  //         console.log("whoops")
-  //         console.error("Failed to get users", error)
+  //         console.log("whoops");
+  //         console.error("Failed to get users", error);
   //       }
   //     }
-  //     fetchUsers(id)
-  //   })
+  //     fetchUsers(id);
+  //   }, []);
+  //   console.log(user);
+  //   const usernameOut = user;
+  //   return usernameOut;
+  // }
+  // const getUsername = (id: number) => {
+  //   const [user, setUser] = useState("");
+    // useEffect(() => {
+    //   const fetchUsers = async (id: number) => {
+    //     try{
+    //       setUser = await axiosInstance.get(`/users/${id}`);
+    //       console.log(usersResponse);
+    //     } catch (error) {
+    //       console.log("whoops");
+    //       console.error("Failed to get users", error);
+    //     }
+    //   }
+    //   fetchUsers(id);
+    // }, []);
 
   //   // const responseUsers2 = fetchUsers(id)
   //   const usernameOut = usersResponse
@@ -160,9 +162,8 @@ const Home: React.FC = () => {
         >
           <strong>{task.name}</strong>
         </Col>
-        <Col xs={2}>{
-        // getUsername
-        (task.creator_id)}</Col>
+        <Col xs={2}>{task.creator_id}</Col>
+        {/* <Col xs={2} >{fetchUsers(task.creator_id)}</Col> */}
         <Col xs={2}>{(task.due_date.split("T"))[0]}</Col>
         <Col xs={2}>
           <Dropdown>
