@@ -16,8 +16,10 @@ export class UsersController {
   async createUser(@Body() createUserDto: CreateUserDTO): Promise<{ success: boolean; contents?: any; error?: string }> {
     try {
       const contents = await this.usersService.createUser(createUserDto);
+      console.log('user created:', contents);
       return { success: true, contents };
     } catch (error) {
+      console.error('error creating user:', error.message);
       return { success: false, error: error.message };
     }
   }
@@ -27,8 +29,10 @@ export class UsersController {
   async getUsers(): Promise<{ success: boolean; contents?: any; error?: string }> {
     try {
       const contents = await this.usersService.getUsers();
+      console.log('users retrieved:', contents);
       return { success: true, contents };
     } catch (error) {
+      console.error('error retrieving users:', error.message);
       return { success: false, error: error.message };
     }
   }
@@ -38,8 +42,10 @@ export class UsersController {
   async getUserById(@Param('id') id: number): Promise<{ success: boolean; contents?: any; error?: string }> {
     try {
       const contents = await this.usersService.getUserById(id);
+      console.log(`user retrieved with id ${id}:`, contents);
       return { success: true, contents };
     } catch (error) {
+      console.error(`error retrieving user with id ${id}:`, error.message);
       return { success: false, error: error.message };
     }
   }
@@ -52,8 +58,10 @@ export class UsersController {
   ): Promise<{ success: boolean; contents?: any; error?: string }> {
     try {
       const contents = await this.usersService.updateUser(id, updateUserDto);
+      console.log(`user updated with id ${id}:`, contents);
       return { success: true, contents };
     } catch (error) {
+      console.error(`error updating user with id ${id}:`, error.message);
       return { success: false, error: error.message };
     }
   }
@@ -64,10 +72,13 @@ export class UsersController {
     @Param('id') id: number,
     @Body() updatePasswordDto: UpdatePasswordDTO,
   ): Promise<{ success: boolean; contents?: any; error?: string }> {
+    console.log(`updating password for user with id ${id}`)
     try {
       const contents = await this.usersService.updatePassword(id, updatePasswordDto);
+      console.log(`password updated for user with id ${id}:`, contents);
       return { success: true, contents };
     } catch (error) {
+      console.error(`error updating password for user with id ${id}:`, error.message);
       return { success: false, error: error.message };
     }
   }
@@ -75,10 +86,13 @@ export class UsersController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async deleteUser(@Param('id') id: number): Promise<{ success: boolean; contents?: any; error?: string }> {
+    console.log(`deleting user with id: ${id}`);
     try {
       const contents = await this.usersService.deleteUser(id);
+      console.log(`user deleted with id ${id}:`, contents);
       return { success: true, contents };
     } catch (error) {
+      console.error(`error deleting user with id ${id}:`, error.message);
       return { success: false, error: error.message };
     }
   }
