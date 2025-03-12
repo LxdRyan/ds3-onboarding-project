@@ -4,7 +4,6 @@ import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdateUserDTO } from './dto/update-user.dto';
 import { UpdatePasswordDTO } from './dto/update-password.dto';
 import { Public } from 'src/auth/auth.constants';
-// import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -66,19 +65,19 @@ export class UsersController {
     }
   }
 
-  @Put(':id/password')
+  @Put(':username/password')
   @HttpCode(HttpStatus.OK)
   async updatePassword(
-    @Param('id') id: number,
+    @Param('username') username: string,
     @Body() updatePasswordDto: UpdatePasswordDTO,
   ): Promise<{ success: boolean; contents?: any; error?: string }> {
-    console.log(`updating password for user with id ${id}`)
+    console.log(`updating password for user with username ${username}`)
     try {
-      const contents = await this.usersService.updatePassword(id, updatePasswordDto);
-      console.log(`password updated for user with id ${id}:`, contents);
+      const contents = await this.usersService.updatePassword(username, updatePasswordDto);
+      console.log(`password updated for user with username ${username}:`, contents);
       return { success: true, contents };
     } catch (error) {
-      console.error(`error updating password for user with id ${id}:`, error.message);
+      console.error(`error updating password for user with username ${username}:`, error.message);
       return { success: false, error: error.message };
     }
   }

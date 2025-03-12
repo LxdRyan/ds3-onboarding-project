@@ -37,7 +37,7 @@ const SignUpPage: React.FC = () => {
         alert("Sign-Up successful!");
         navigate("/");
       } else {
-        setError(response.data.message || "Sign-Up failed");
+        setError(response.data.error || "Sign-Up failed");
       }
     } catch (error) {
       console.error("Sign-Up failed:", error);

@@ -72,8 +72,8 @@ export class UsersService {
     };
   }
 
-  async updatePassword(id: number, updatePasswordDto: UpdatePasswordDTO): Promise<UserDTO> {
-    const user = await this.userRepository.findOne({ where: { id: id } });
+  async updatePassword(username: string, updatePasswordDto: UpdatePasswordDTO): Promise<UserDTO> {
+    const user = await this.userRepository.findOne({ where: { username: username } });
 
     if (!user) {
       throw new Error('user not found');
@@ -87,7 +87,7 @@ export class UsersService {
     };
 
     return {
-      id: id,
+      id: user.id,
       name: user.name,
       username: user.username,
       profile_picture: user.profile_picture

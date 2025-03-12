@@ -31,10 +31,7 @@ const ForgotPasswordPage: React.FC = () => {
     formData.append("password", password);
 
     try {
-
-      const id = await axiosInstance.get('/auth/profile')
-
-      const response = await axiosInstance.put(`/users/${id.data}/password`, formData);
+      const response = await axiosInstance.put(`/users/${username}/password`, formData);
 
       if (response.data.success) {
         console.log(formData)
