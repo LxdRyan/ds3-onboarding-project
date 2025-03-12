@@ -5,11 +5,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        BACKEND_PORT: ${BACKEND_PORT}
+        FRONTEND_PORT: ${FRONTEND_PORT}
     container_name: todo_backend
     environment:
       BACKEND_PORT: ${BACKEND_PORT}
       DB_HOST: db
-      DB_PORT: ${POSTGRES_PORT}
+      DB_PORT: 5432
       DB_USER: ${POSTGRES_USER}
       DB_PASS: ${POSTGRES_PASSWORD}
       DB_NAME: ${POSTGRES_DB}
@@ -17,6 +20,9 @@ services:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     depends_on:
       - db
+    volumes:
+      - ./backend/src:/app/backend/src
+      - /app/backend/node_modules
 
   frontend:
     env_file:
@@ -43,11 +49,13 @@ services:
         - POSTGRES_DB=${POSTGRES_DB}
     container_name: todo_db
     environment:
-      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_PORT: 5432
     ports:
-      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+      - "5432:5432"
     expose:
-      - "${POSTGRES_PORT}"
+      - "5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
