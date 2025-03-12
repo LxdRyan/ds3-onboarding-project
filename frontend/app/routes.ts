@@ -7,4 +7,5 @@ export default [
   route("update/:taskId", "routes/update.tsx"),
   route("signup", "routes/signup.tsx"),
   route("task/:taskId", "routes/details.tsx"),
+  route("forgot-password","routes/password.tsx")
 ]

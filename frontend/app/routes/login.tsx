@@ -40,6 +40,10 @@ const LoginPage: React.FC = () => {
     navigate("/signup");
   };
 
+  const handleForgotPassword = () => {
+    navigate("/forgot-password");
+  };
+
   return (
     <div className="limiter">
       <div className="container-login100">
@@ -92,6 +96,23 @@ const LoginPage: React.FC = () => {
             <div className="container-login100-form-btn">
               <button type="submit" className="login100-form-btn">
                 Login
+              </button>
+            </div>
+
+            <div className="text-center p-t-12">
+              <button
+                type="button"
+                className="txt2"
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                  color: "#007BFF",
+                }}
+                onClick={handleForgotPassword}
+              >
+               Forgot Password?
               </button>
             </div>
 
