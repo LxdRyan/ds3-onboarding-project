@@ -31,10 +31,13 @@ const ForgotPasswordPage: React.FC = () => {
     formData.append("password", password);
 
     try {
+
       const id = await axiosInstance.get('/auth/profile')
+      
       const response = await axiosInstance.put(`/users/${id}/password`, formData);
 
       if (response.data.success) {
+        console.log(formData)
         console.log("Password Changed:", response.data);
         setSuccess("Password Changed Successfully!");
         navigate("/");
@@ -42,6 +45,7 @@ const ForgotPasswordPage: React.FC = () => {
         setError(response.data.message || "Try Again");
       }
     } catch (error) {
+      console.log(formData)
       console.error("Try Again:", error);
       setError("Try Again!");
     }

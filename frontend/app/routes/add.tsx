@@ -28,12 +28,11 @@ const AddTask: React.FC = () => {
       try {
         const response = await axiosInstance.get("/users");
         console.log(response)
-        setUsers(response.data.data); // Assuming response.data is an array of user objects
+        setUsers(response.data.contents); // Assuming response.data is an array of user objects
       } catch (error) {
         console.error("Failed to fetch users:", error);
       }
     };
-
     fetchUsers();
   }, []);
 
