@@ -28,9 +28,10 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Get('profile')
   async profile(@Request() req: ExpressRequest) {
-    if (req.user && 'userId' in req.user) {
-      return req.user.userId;
+    console.log(req.user)
+    if (req.user && 'sub' in req.user) {
+      return req.user.sub;
     }
-    throw new Error('User not found');
+    throw new Error('user not found');
   }
 }

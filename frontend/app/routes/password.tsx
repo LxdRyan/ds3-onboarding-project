@@ -42,7 +42,7 @@ const ForgotPasswordPage: React.FC = () => {
         setSuccess("Password Changed Successfully!");
         navigate("/");
       } else {
-        setError(response.data.message || "Try Again");
+        setError(response.data.error || "Try Again");
       }
     } catch (error) {
       console.log(formData)
