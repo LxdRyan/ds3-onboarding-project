@@ -17,7 +17,8 @@ const Profile: React.FC = () => {
     const fetchProfileDetails = async () => {
       try {
         const response = await axiosInstance.get("/auth/profile");
-        const profile = await axiosInstance.get(`users/${response.data}`);
+        const user = await axiosInstance.get(`/users/${response.data.contents}`);
+        const profile = user.data.contents;
 
         setName(profile.name);
         setUsername(profile.username);
@@ -35,7 +36,7 @@ const Profile: React.FC = () => {
     try {
       const updatedProfile = { username };
 
-      await axiosInstance.put(`/user/${userId}`, updatedProfile);
+      await axiosInstance.put(`/users/${userId}`, updatedProfile);
       alert("Username updated successfully");
       navigate("/home");
     } catch (error) {
