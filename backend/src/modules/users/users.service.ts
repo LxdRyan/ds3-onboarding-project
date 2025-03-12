@@ -5,6 +5,7 @@ import { Users } from './entities/user.entity';
 import { UserDTO } from './dto/user.dto';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdateUserDTO } from './dto/update-user.dto';
+import { UpdatePasswordDTO } from './dto/update-password.dto';
 
 @Injectable()
 export class UsersService {
@@ -70,6 +71,30 @@ export class UsersService {
         : null,
     };
   }
+
+  async updatePassword(id: number, updatePasswordDto: UpdatePasswordDTO): Promise<UserDTO> {
+    const user = await this.userRepository.findOne({ where: { id: id } });
+
+    if (!user) {
+      throw new Error('user not found');
+    };
+
+    if (user.username === updatePasswordDto.username && user.name === updatePasswordDto.name) {
+      await this.userRepository.update(id, { password: updatePasswordDto.password });
+    } else {
+      throw new Error('invalid username or name');
+    };
+
+    return {
+      id: id,
+      name: user.name,
+      username: user.username,
+      profile_picture: user.profile_picture
+        ? `data:image/png;base64,${user.profile_picture.toString('base64')}`
+        : null,
+    };
+  }
+
 
   async deleteUser(id: number): Promise<UserDTO> {
     const user = await this.userRepository.findOne({ where: { id: id } });
