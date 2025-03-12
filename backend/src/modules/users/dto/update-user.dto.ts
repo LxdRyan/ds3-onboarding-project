@@ -8,7 +8,4 @@ export class UpdateUserDTO {
   @IsString()
   @IsOptional()
   username: string;
-
-  @IsOptional()
-  profile_picture?: Buffer;
 }

@@ -23,15 +23,6 @@ export class Users {
     this.password = salt + scryptSync(this.password, salt, 64).toString('hex'); // hash password with salt
   }
 
-  @Column({ type: 'bytea', nullable: true })
-  profile_picture: Buffer | null;
-
-  // @BeforeInsert()
-  // @BeforeUpdate()
-  // convertProfilePicture() {
-  //   this.profile_picture = this.profile_picture ? Buffer.from(this.profile_picture.toString(), 'base64') : null;
-  // }
-
   // @OneToMany(() => Tasks, (task) => task.creator)
   // tasks: Tasks[];
 

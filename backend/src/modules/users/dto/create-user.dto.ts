@@ -12,7 +12,4 @@ export class CreateUserDTO {
   @IsString()
   @IsNotEmpty()
   password: string;
-
-  @IsOptional()
-  profile_picture?: Buffer;
 }

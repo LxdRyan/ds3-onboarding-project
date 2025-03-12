@@ -32,9 +32,9 @@ export class UsersService implements OnModuleInit {
 
     if (!testUserExists) {
       await this.createUser({
-        name: "test",
-        username: "test",
-        password: "test",
+        name: process.env.TEST_USER_NAME || "test",
+        username: process.env.TEST_USER_USERNAME || "test",
+        password: process.env.TEST_USER_PASSWORD || "test",
       })
     }
   }
@@ -46,9 +46,6 @@ export class UsersService implements OnModuleInit {
       id: user.id,
       name: user.name,
       username: user.username,
-      profile_picture: user.profile_picture
-        ? `data:image/png;base64,${user.profile_picture.toString('base64')}`
-        : null,
     }));
   }
 
@@ -63,9 +60,6 @@ export class UsersService implements OnModuleInit {
       id: user.id,
       name: user.name,
       username: user.username,
-      profile_picture: user.profile_picture
-        ? `data:image/png;base64,${user.profile_picture.toString('base64')}`
-        : null,
     };
   }
 
@@ -82,9 +76,6 @@ export class UsersService implements OnModuleInit {
       id: id,
       username: updateUserDto.username,
       name: updateUserDto.name,
-      profile_picture: updateUserDto.profile_picture
-        ? `data:image/png;base64,${updateUserDto.profile_picture.toString('base64')}`
-        : null,
     };
   }
 
@@ -106,9 +97,6 @@ export class UsersService implements OnModuleInit {
       id: user.id,
       name: user.name,
       username: user.username,
-      profile_picture: user.profile_picture
-        ? `data:image/png;base64,${user.profile_picture.toString('base64')}`
-        : null,
     };
   }
 
@@ -126,9 +114,6 @@ export class UsersService implements OnModuleInit {
       id: id,
       name: user.name,
       username: user.username,
-      profile_picture: user.profile_picture
-        ? `data:image/png;base64,${user.profile_picture.toString('base64')}`
-        : null,
     };
   }
 }
