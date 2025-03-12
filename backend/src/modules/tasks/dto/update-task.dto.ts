@@ -1,10 +1,6 @@
 import { IsString, IsNumber, IsNotEmpty, IsOptional, IsDate } from 'class-validator';
 
 export class UpdateTaskDTO {
-  @IsNumber()
-  @IsNotEmpty()
-  id: number;
-
   @IsString()
   @IsOptional()
   name: string;
