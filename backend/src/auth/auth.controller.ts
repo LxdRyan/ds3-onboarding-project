@@ -13,10 +13,7 @@ export class AuthController {
   @Post('login')
   @UseGuards(AuthLocalGuard)
   async login(@Request() req: ExpressRequest) {
-    return {
-      success: true,
-      contents: await this.authService.login(req.user),
-    };
+    return this.authService.login(req.user)
   }
 
   @HttpCode(HttpStatus.OK)
