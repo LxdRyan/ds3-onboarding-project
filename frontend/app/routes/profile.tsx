@@ -37,7 +37,7 @@ const Profile: React.FC = () => {
       const updatedProfile = { name };
 
       await axiosInstance.put(`/users/${userId}`, updatedProfile);
-      alert("Username updated successfully");
+      alert("Display name updated successfully");
       navigate("/home");
     } catch (error) {
       console.error("Failed to update profile:", error);
@@ -99,7 +99,7 @@ const Profile: React.FC = () => {
                 onClick={handleUpdate}
                 className="login100-form-btn"
               >
-                Update Username
+                Update Display Name
               </button>
             </div>
 

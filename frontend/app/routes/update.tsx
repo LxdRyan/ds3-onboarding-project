@@ -196,7 +196,7 @@ const UpdateTask: React.FC = () => {
                   textDecoration: "underline",
                   color: "#007BFF",
                 }}
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/home")}
               >
                 Back to Home
                 <i

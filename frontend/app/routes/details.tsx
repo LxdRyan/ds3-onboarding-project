@@ -11,7 +11,7 @@ interface Task {
   name: string;
   contents: string;
   priority: string; // High, Medium, or Low
-  owner: string;
+  creator_id: number;
   dueDate: string;
   status: string; // e.g., "Completed", "In Progress"
 }
