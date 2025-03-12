@@ -14,7 +14,7 @@ interface User {
 const AddTask: React.FC = () => {
   const [name, setName] = useState("");
   const [contents, setContents] = useState("");
-  const [creator_id, setCreatorID] = useState("");
+  const [creator_id, setCreatorID] = useState<number>();
   const [due_date, setDueDate] = useState("");
   const [status, setStatus] = useState("");
   const [priority, setPriority] = useState("");
@@ -37,7 +37,7 @@ const AddTask: React.FC = () => {
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    if (!name || !contents || !creator_id || !due_date || !status || !priority) {
+    if (!name || !contents || creator_id == undefined || !due_date || !status || !priority) {
       alert("Please fill in all required fields.");
       return;
     }
@@ -98,7 +98,7 @@ const AddTask: React.FC = () => {
           <select
             className="input100"
             value={creator_id}
-            onChange={(e) => setCreatorID(e.target.value)}
+            onChange={(e) => setCreatorID(parseInt(e.target.value))}
             required
           >
             <option value="">Select Creator</option>
