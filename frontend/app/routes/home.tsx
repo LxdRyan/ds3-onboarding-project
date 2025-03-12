@@ -43,8 +43,38 @@ const Home: React.FC = () => {
     navigate(`/task/${taskId}`);
   };
 
+
+  
+
+
+
+
+
+
+
   const renderTasksByPriority = (priority: string) => {
     const filteredTasks = tasks.filter((task) => task.priority === priority); // Filter tasks by priority
+    const [status, setStatus] = useState("");
+
+
+    const handleUpdate = async (taskId) => {
+      try {
+        const updatedTask = {
+          contents: 
+          status,
+        };
+  
+        await axiosInstance.put(`/tasks/${taskId}`, updatedTask);
+        alert("Task updated successfully");
+        navigate("/home");
+      } catch (error) {
+        console.error("Failed to update task:", error);
+        alert("Failed to update task");
+      }
+    };
+
+
+
     return filteredTasks.map((task) => (
       <Row key={task.id} className="align-items-center py-2 border-bottom">
         <Col xs={1}>
@@ -68,7 +98,7 @@ const Home: React.FC = () => {
               {task.status}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item>Completed</Dropdown.Item>
+              <Dropdown.Item onClick={() => {setStatus("Completed"); handleUpdate(task.id)}}>Completed</Dropdown.Item>
               <Dropdown.Item>In Progress</Dropdown.Item>
               <Dropdown.Item>Not Started</Dropdown.Item>
             </Dropdown.Menu>
