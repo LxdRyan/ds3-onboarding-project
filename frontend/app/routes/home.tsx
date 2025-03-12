@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 interface Task {
   id: number;
   name: string;
-  taskContents: string;
+  contents: string;
   priority: string; // High, Medium, or Low
   owner: string;
   dueDate: string;
@@ -21,13 +21,18 @@ const Home: React.FC = () => {
   
   // Explicitly type the state as Task[]
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [taskContents, setTaskContents] = useState("");
+  const [name, setName] = useState("");
+  const [due_date, setDueDate] = useState("");
+  const [status, setStatus] = useState("");
+  const [priority, setPriority] = useState("");
 
   useEffect(() => {
     // Fetch tasks from API
     const fetchTasks = async () => {
       try {
         const response = await axiosInstance.get('/tasks'); 
-        console.log(response)// Ensure the response is typed
+        console.log(response) // Ensure the response is typed
         setTasks(response.data.contents);
       } catch (error) {
         console.error('Failed to fetch tasks:', error);
@@ -44,52 +49,38 @@ const Home: React.FC = () => {
     navigate(`/task/${taskId}`);
   };
 
+  const handleUpdate = async (taskId: number) => {
+    try {
+      const updatedTask = {
+        contents: taskContents,
+        name,
+        due_date,
+        status,
+        priority,
+      };
+      console.log("updating")
+      console.log(updatedTask)
+      await axiosInstance.put(`/tasks/${taskId}`, updatedTask);
+      alert("Task updated successfully");
+      navigate("/home");
+    } catch (error) {
+      console.error("Failed to update task:", error);
+      alert("Failed to update task");
+    }
+  };
 
-  
-
-
-
-
-
-
+  const handleStatusChange = (task: Task, newStatus: string) => {
+    setStatus(newStatus);
+    setName(task.name);
+    setTaskContents(task.contents);
+    setDueDate(task.dueDate);
+    setPriority(task.priority);
+    handleUpdate(task.id);
+  };
 
   const renderTasksByPriority = (priority: string) => {
     const filteredTasks = tasks.filter((task) => task.priority === priority); // Filter tasks by priority
-    const [taskContents, setTaskContents] = useState("");
-    const [name, setName] = useState("");
-    const [due_date, setDueDate] = useState("");
-    const [status, setStatus] = useState("");
-    const [updatedTask, setUpdatedTask] = useState("") 
-
-
-    const handleUpdate = async (taskId) => {
-      try {
-        // const [taskContents, setTaskContents] = useState("");
-        // const [name, setName] = useState("");
-        // const [due_date, setDueDate] = useState("");
-        // const [status, setStatus] = useState("");
-        // const [updatedTask, setUpdatedTask] = useState("") 
-        setUpdatedTask ( {
-          contents: 
-            taskContents,
-            name,
-            due_date,
-            status,
-            priority,
-        });
-        console.log("updating")
-        console.log(updatedTask)
-        await axiosInstance.put(`/tasks/${taskId}`, updatedTask);
-        alert("Task updated successfully");
-        navigate("/home");
-      } catch (error) {
-        console.error("Failed to update task:", error);
-        alert("Failed to update task");
-      }
-    };
-
-
-
+      
     return filteredTasks.map((task) => (
       <Row key={task.id} className="align-items-center py-2 border-bottom">
         <Col xs={1}>
@@ -113,25 +104,9 @@ const Home: React.FC = () => {
               {task.status}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => {setUpdatedTask({
-                                                            contents: "teststr",
-                                                            name: "testname",
-                                                            due_date: "testdue",
-                                                            status: 'Completed',
-                                                            priority: priority,
-                                                            test: "test"
-                                                          }); 
-                handleUpdate(task.id)}}>Completed</Dropdown.Item>
-              <Dropdown.Item onClick={() => {setStatus("In Progress"); 
-                setName(task.name); 
-                setTaskContents(task.taskContents); 
-                setDueDate(task.dueDate); 
-                handleUpdate(task.id)}}>In Progress</Dropdown.Item>
-              <Dropdown.Item onClick={() => {setStatus("Not Started"); 
-                setName(task.name); 
-                setTaskContents(task.taskContents); 
-                setDueDate(task.dueDate); 
-                handleUpdate(task.id)}}>Not Started</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleStatusChange(task, "Completed")}>Completed</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleStatusChange(task, "In Progress")}>In Progress</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleStatusChange(task, "Not Started")}>Not Started</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Col>
