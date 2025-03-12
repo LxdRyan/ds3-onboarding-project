@@ -1,10 +1,7 @@
 import { IsString, IsNumber, IsNotEmpty, IsOptional, IsDate } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class CreateTaskDTO {
-  @IsNumber()
-  @IsNotEmpty()
-  id: number;
-
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -19,6 +16,7 @@ export class CreateTaskDTO {
 
   @IsDate()
   @IsNotEmpty()
+  @Transform(({ value }) => new Date(value))
   due_date: Date;
 
   @IsString()

@@ -9,7 +9,7 @@ export class Tasks {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   contents: string;
 
   // @ManyToOne(() => Users, (user) => user.tasks, { eager: true })
@@ -17,7 +17,7 @@ export class Tasks {
   @Column()
   creator_id: number;
 
-  @Column()
+  @Column({ type: 'timestamp' })
   due_date: Date;
 
   @Column()

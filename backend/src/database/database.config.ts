@@ -16,7 +16,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       password: this.configService.get<string>('DB_PASS', 'mypassword'),
       database: this.configService.get<string>('DB_NAME', 'mydatabase'),
       entities: [Users, Tasks],
-      synchronize: this.configService.get<boolean>('DB_SYNC', false), // set to false in production and use migrations
+      synchronize: this.configService.get<boolean>('DB_SYNC', true), // set to false in production and use migrations
     };
   }
 }

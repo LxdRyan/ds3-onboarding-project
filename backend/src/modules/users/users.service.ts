@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users } from './entities/user.entity';
@@ -8,7 +8,7 @@ import { UpdateUserDTO } from './dto/update-user.dto';
 import { UpdatePasswordDTO } from './dto/update-password.dto';
 
 @Injectable()
-export class UsersService {
+export class UsersService implements OnModuleInit {
   constructor(
     @InjectRepository(Users) private readonly userRepository: Repository<Users>,
   ) {}
@@ -16,11 +16,27 @@ export class UsersService {
   async findOne(username: string): Promise<Users | null> {
     return this.userRepository.findOne({ where: { username } });
   }
-
+  
   async createUser(createUserDTO: CreateUserDTO): Promise<Users> {
     const user = this.userRepository.create(createUserDTO);
     await this.userRepository.save(user);
     return user;
+  }
+
+  async onModuleInit() {
+    await this.createTestUser();
+  }
+
+  async createTestUser() {
+    const testUserExists = await this.findOne("test")
+
+    if (!testUserExists) {
+      await this.createUser({
+        name: "test",
+        username: "test",
+        password: "test",
+      })
+    }
   }
 
   async getUsers(): Promise<UserDTO[]> {
@@ -37,7 +53,7 @@ export class UsersService {
   }
 
   async getUserById(id: number): Promise<UserDTO | null> {
-    const user = await this.userRepository.findOne({ where: { id: id } });
+    const user = await this.userRepository.findOne({ where: { id } });
 
     if (!user) {
       throw new Error('user not found');
@@ -54,7 +70,7 @@ export class UsersService {
   }
 
   async updateUser(id: number, updateUserDto: UpdateUserDTO): Promise<UserDTO> {
-    const user = await this.userRepository.findOne({ where: { id: id } });
+    const user = await this.userRepository.findOne({ where: { id } });
 
     if (!user) {
       throw new Error('user not found');
@@ -72,7 +88,7 @@ export class UsersService {
     };
   }
 
-  async updatePassword(username: string, updatePasswordDto: UpdatePasswordDTO): Promise<UserDTO> {
+  async forgotPassword(username: string, updatePasswordDto: UpdatePasswordDTO): Promise<UserDTO> {
     const user = await this.userRepository.findOne({ where: { username: username } });
 
     if (!user) {
@@ -98,7 +114,7 @@ export class UsersService {
 
 
   async deleteUser(id: number): Promise<UserDTO> {
-    const user = await this.userRepository.findOne({ where: { id: id } });
+    const user = await this.userRepository.findOne({ where: { id } });
 
     if (!user) {
       throw new Error('user not found');

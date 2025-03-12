@@ -67,13 +67,13 @@ export class UsersController {
 
   @Put(':username/password')
   @HttpCode(HttpStatus.OK)
-  async updatePassword(
+  async forgotPassword(
     @Param('username') username: string,
     @Body() updatePasswordDto: UpdatePasswordDTO,
   ): Promise<{ success: boolean; contents?: any; error?: string }> {
     console.log(`updating password for user with username ${username}`)
     try {
-      const contents = await this.usersService.updatePassword(username, updatePasswordDto);
+      const contents = await this.usersService.forgotPassword(username, updatePasswordDto);
       console.log(`password updated for user with username ${username}:`, contents);
       return { success: true, contents };
     } catch (error) {
