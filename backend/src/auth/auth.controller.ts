@@ -25,8 +25,12 @@ export class AuthController {
     });
   }
 
-  // @Get('profile')
-  // getProfile(@Request() request: any) {
-  //   return request.user;
-  // }
+  @HttpCode(HttpStatus.OK)
+  @Get('profile')
+  async profile(@Request() req: ExpressRequest) {
+    if (req.user && 'userId' in req.user) {
+      return req.user.userId;
+    }
+    throw new Error('User not found');
+  }
 }
