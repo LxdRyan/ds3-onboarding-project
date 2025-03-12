@@ -24,6 +24,7 @@ export class UsersService {
 
   async getUsers(): Promise<UserDTO[]> {
     const users = await this.userRepository.find();
+
     return users.map((user) => ({
       id: user.id,
       name: user.name,

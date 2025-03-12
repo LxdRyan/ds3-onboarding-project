@@ -15,7 +15,7 @@ export class UsersController {
   async createUser(@Body() createUserDto: CreateUserDTO) {
     return {
       success: true,
-      data: await this.usersService.createUser(createUserDto),
+      contents: await this.usersService.createUser(createUserDto),
     };
   }
 
@@ -24,7 +24,7 @@ export class UsersController {
   async getUsers() {
     return {
       success: true,
-      data: await this.usersService.getUsers(),
+      contents: await this.usersService.getUsers(),
     };
   }
 
@@ -33,7 +33,7 @@ export class UsersController {
   async getUserById(@Param('id') id: number) {
     return {
       success: true,
-      data: await this.usersService.getUserById(id),
+      contents: await this.usersService.getUserById(id),
     };
   }
 
@@ -45,7 +45,7 @@ export class UsersController {
   ) {
     return {
       success: true,
-      data: await this.usersService.updateUser(id, updateUserDto),
+      contents: await this.usersService.updateUser(id, updateUserDto),
     };
   }
 
@@ -54,7 +54,7 @@ export class UsersController {
   async deleteUser(@Param('id') id: number) {
     return {
       success: true,
-      data: await this.usersService.deleteUser(id),
+      contents: await this.usersService.deleteUser(id),
     };
   }
 }

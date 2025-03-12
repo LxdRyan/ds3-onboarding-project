@@ -8,6 +8,7 @@ interface User {
   id: string;
   name: string;
   username: string;
+  profile_picture: string | null;
 }
 
 const AddTask: React.FC = () => {
