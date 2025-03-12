@@ -13,7 +13,10 @@ export class AuthController {
   @Post('login')
   @UseGuards(AuthLocalGuard)
   async login(@Request() req: ExpressRequest) {
-    return this.authService.login(req.user);
+    return {
+      success: true,
+      contents: await this.authService.login(req.user),
+    };
   }
 
   @HttpCode(HttpStatus.OK)
@@ -30,7 +33,10 @@ export class AuthController {
   async profile(@Request() req: ExpressRequest) {
     console.log(req.user)
     if (req.user && 'sub' in req.user) {
-      return req.user.sub;
+      return {
+        success: true,
+        contents: req.user.sub,
+      };
     }
     throw new Error('user not found');
   }

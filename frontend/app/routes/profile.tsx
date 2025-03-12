@@ -17,7 +17,7 @@ const Profile: React.FC = () => {
     const fetchProfileDetails = async () => {
       try {
         const response = await axiosInstance.get("/auth/profile");
-        const profile = response.data.contents;
+        const profile = await axiosInstance.get(`users/${response.data}`);
 
         setName(profile.name);
         setUsername(profile.username);
