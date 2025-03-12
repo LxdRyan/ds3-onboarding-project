@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 interface Task {
   id: number;
   name: string;
-  contents: string;
+  taskContents: string;
   priority: string; // High, Medium, or Low
   owner: string;
   dueDate: string;
@@ -59,6 +59,7 @@ const Home: React.FC = () => {
     const [name, setName] = useState("");
     const [due_date, setDueDate] = useState("");
     const [status, setStatus] = useState("");
+    const [updatedTask, setUpdatedTask] = useState("") 
 
 
     const handleUpdate = async (taskId) => {
@@ -67,14 +68,15 @@ const Home: React.FC = () => {
         // const [name, setName] = useState("");
         // const [due_date, setDueDate] = useState("");
         // const [status, setStatus] = useState("");
-        const updatedTask = {
+        // const [updatedTask, setUpdatedTask] = useState("") 
+        setUpdatedTask ( {
           contents: 
-          taskContents,
-          name,
-          due_date,
-          status,
-          priority,
-        };
+            taskContents,
+            name,
+            due_date,
+            status,
+            priority,
+        });
         console.log("updating")
         console.log(updatedTask)
         await axiosInstance.put(`/tasks/${taskId}`, updatedTask);
@@ -111,19 +113,23 @@ const Home: React.FC = () => {
               {task.status}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => {setStatus("Completed"); 
-                setName(task.name); 
-                setTaskContents(task.contents); 
-                setDueDate(task.dueDate); 
+              <Dropdown.Item onClick={() => {setUpdatedTask({
+                                                            contents: "teststr",
+                                                            name: "testname",
+                                                            due_date: "testdue",
+                                                            status: 'Completed',
+                                                            priority: priority,
+                                                            test: "test"
+                                                          }); 
                 handleUpdate(task.id)}}>Completed</Dropdown.Item>
               <Dropdown.Item onClick={() => {setStatus("In Progress"); 
                 setName(task.name); 
-                setTaskContents(task.contents); 
+                setTaskContents(task.taskContents); 
                 setDueDate(task.dueDate); 
                 handleUpdate(task.id)}}>In Progress</Dropdown.Item>
               <Dropdown.Item onClick={() => {setStatus("Not Started"); 
                 setName(task.name); 
-                setTaskContents(task.contents); 
+                setTaskContents(task.taskContents); 
                 setDueDate(task.dueDate); 
                 handleUpdate(task.id)}}>Not Started</Dropdown.Item>
             </Dropdown.Menu>
