@@ -80,7 +80,8 @@ export class UsersService {
     };
 
     if (user.username === updatePasswordDto.username && user.name === updatePasswordDto.name) {
-      await this.userRepository.update(id, { password: updatePasswordDto.password });
+      user.password = updatePasswordDto.password
+      await this.userRepository.save(user);
     } else {
       throw new Error('invalid username or name');
     };

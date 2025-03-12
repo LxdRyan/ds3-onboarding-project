@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany, BeforeUpdate } from 'typeorm';
 import { Tasks } from '../../tasks/entities/task.entity';
 import { randomBytes, scryptSync } from 'crypto';
 
@@ -17,6 +17,7 @@ export class Users {
   password: string;
 
   @BeforeInsert()
+  @BeforeUpdate()
   hashPassword() {
     const salt = randomBytes(16).toString('hex'); // create salt
     this.password = salt + scryptSync(this.password, salt, 64).toString('hex'); // hash password with salt
@@ -25,10 +26,11 @@ export class Users {
   @Column({ type: 'bytea', nullable: true })
   profile_picture: Buffer | null;
 
-  @BeforeInsert()
-  convertProfilePicture() {
-    this.profile_picture = this.profile_picture ? Buffer.from(this.profile_picture.toString(), 'base64') : null;
-  }
+  // @BeforeInsert()
+  // @BeforeUpdate()
+  // convertProfilePicture() {
+  //   this.profile_picture = this.profile_picture ? Buffer.from(this.profile_picture.toString(), 'base64') : null;
+  // }
 
   // @OneToMany(() => Tasks, (task) => task.creator)
   // tasks: Tasks[];
