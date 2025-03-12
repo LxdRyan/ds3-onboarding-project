@@ -21,18 +21,13 @@ const Home: React.FC = () => {
   
   // Explicitly type the state as Task[]
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [taskContents, setTaskContents] = useState("");
-  const [name, setName] = useState("");
-  const [due_date, setDueDate] = useState("");
-  const [status, setStatus] = useState("");
-  const [priority, setPriority] = useState("");
 
   useEffect(() => {
     // Fetch tasks from API
     const fetchTasks = async () => {
       try {
         const response = await axiosInstance.get('/tasks'); 
-        console.log(response) // Ensure the response is typed
+        console.log(response); // Ensure the response is typed
         setTasks(response.data.contents);
       } catch (error) {
         console.error('Failed to fetch tasks:', error);
@@ -49,7 +44,7 @@ const Home: React.FC = () => {
     navigate(`/task/${taskId}`);
   };
 
-  const handleUpdate = async (taskId: number,updatedTask:Task) => {
+  const handleUpdate = async (taskId: number, updatedTask: Task) => {
     try {
       console.log("updating");
       console.log(updatedTask);
@@ -63,41 +58,38 @@ const Home: React.FC = () => {
   };
 
   const handleStatusChange = async (task: Task, newStatus: string) => {
-      const updatedTask: Task = {
-        id: task.id,
-        contents: task.contents,
-        name: task.name,
-        dueDate: task.dueDate,
-        status: newStatus,
-        priority: task.priority,
-        owner: task.owner,
-      };
-    
-      await handleUpdate(task.id, updatedTask);
+    const updatedTask: Task = {
+      id: task.id,
+      contents: task.contents,
+      name: task.name,
+      dueDate: task.dueDate,
+      status: newStatus,
+      priority: task.priority,
+      owner: task.owner,
     };
-  
+
+    await handleUpdate(task.id, updatedTask);
+  };
 
   const handleIndicator = (status: string) => {
-    if (status == "Completed") {
-      return(
+    if (status === "Completed") {
+      return (
         <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
           <rect x="0" y="0" width="30" height="30" fill="green" />
         </svg>
-      )
-    }
-    else {
-      return(
+      );
+    } else {
+      return (
         <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
           <rect x="0" y="0" width="30" height="30" fill="grey" />
         </svg>
-      )
+      );
     }
-    
-  }
+  };
 
   const renderTasksByPriority = (priority: string) => {
     const filteredTasks = tasks.filter((task) => task.priority === priority); // Filter tasks by priority
-      
+
     return filteredTasks.map((task) => (
       <Row key={task.id} className="align-items-center py-2 border-bottom">
         <Col xs={1}>
@@ -140,6 +132,13 @@ const Home: React.FC = () => {
             </svg>
           </Navbar.Brand>
           <Nav className="ms-auto">
+            <Button
+              variant="outline-primary"
+              className="me-2"
+              onClick={() => handleNavigation("/profile")}
+            >
+              Profile
+            </Button>
             <Button
               variant="primary"
               onClick={() => handleNavigation("/")}
