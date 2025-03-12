@@ -5,7 +5,7 @@ import axiosInstance from "../services/axios";
 import Button from "../services/Button";
 
 interface User {
-  id: string;
+  id: number;
   name: string;
   username: string;
   profile_picture: string | null;
@@ -57,6 +57,7 @@ const AddTask: React.FC = () => {
       alert("Task added successfully!");
       navigate("/home");
     } catch (error) {
+      console.log(newTask.creator_id)
       console.error("Failed to add task:", error);
       alert("Failed to add the task.");
     }
