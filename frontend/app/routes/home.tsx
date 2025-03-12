@@ -36,6 +36,60 @@ const Home: React.FC = () => {
     fetchTasks();
   }, []);
 
+
+  const fetchUsers = async (id: number) => {
+    try{
+      const usersResponse = await axiosInstance.get(`/users/${id}`)
+      setUser = usersResponse.data.contents.username
+      console.log(usersResponse.data.contents.username)
+      return(usersResponse.data.contents.username)
+    } catch (error) {
+      console.log("whoops")
+      console.error("Failed to get users", error)
+    }
+  }
+
+
+  const getUsername = (id:number) =>{
+    const [user, setUser] = useState("");
+    const fetchUsers = async (id: number) => {
+      try{
+        const usersResponse = await axiosInstance.get(`/users/${id}`)
+        setUser = usersResponse.data.contents.username
+        console.log(usersResponse.data.contents.username)
+        // return(usersResponse.data.contents.username)
+      } catch (error) {
+        console.log("whoops")
+        console.error("Failed to get users", error)
+      }
+    }
+    console.log(user)
+    const usernameOut = user
+    return usernameOut
+  }
+  // const getUsername = (id: number) => {
+  //   const [user, setUser] = useState("");
+  //   useEffect(() => {
+  //     const fetchUsers = async (id: number) => {
+  //       try{
+  //         setUser = await axiosInstance.get(`/users/${id}`)
+  //         console.log(usersResponse)
+  //       } catch (error) {
+  //         console.log("whoops")
+  //         console.error("Failed to get users", error)
+  //       }
+  //     }
+  //     fetchUsers(id)
+  //   })
+
+  //   // const responseUsers2 = fetchUsers(id)
+  //   const usernameOut = usersResponse
+  //   console.log("yeet?")
+  //   console.log(usernameOut)
+  //   return (usernameOut)
+  
+  // }
+
   const handleNavigation = (path: string) => {
     navigate(path);
   };
@@ -99,12 +153,17 @@ const Home: React.FC = () => {
           xs={3}
           className="task-title"
           style={{ cursor: "pointer" }}
-          onClick={() => handleTaskClick(task.id)}
+          onClick={() => 
+            //fetchUsers(task.creator_id)}
+            // console.log(task)}
+            handleTaskClick(task.id)}
         >
           <strong>{task.name}</strong>
         </Col>
-        <Col xs={2}>{task.owner}</Col>
-        <Col xs={2}>{task.dueDate}</Col>
+        <Col xs={2}>{
+        // getUsername
+        (task.creator_id)}</Col>
+        <Col xs={2}>{(task.due_date.split("T"))[0]}</Col>
         <Col xs={2}>
           <Dropdown>
             <Dropdown.Toggle variant="secondary" size="sm">
