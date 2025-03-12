@@ -78,15 +78,31 @@ const Home: React.FC = () => {
     handleUpdate(task.id);
   };
 
+  const handleIndicator = (status: string) => {
+    if (status == "Completed") {
+      return(
+        <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="30" height="30" fill="green" />
+        </svg>
+      )
+    }
+    else {
+      return(
+        <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="30" height="30" fill="grey" />
+        </svg>
+      )
+    }
+    
+  }
+
   const renderTasksByPriority = (priority: string) => {
     const filteredTasks = tasks.filter((task) => task.priority === priority); // Filter tasks by priority
       
     return filteredTasks.map((task) => (
       <Row key={task.id} className="align-items-center py-2 border-bottom">
         <Col xs={1}>
-          <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" y="0" width="30" height="30" fill="grey" />
-          </svg>
+          {handleIndicator(task.status)}
         </Col>
         <Col
           xs={3}
