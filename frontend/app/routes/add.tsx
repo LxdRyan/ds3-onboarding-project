@@ -4,6 +4,7 @@ import Layout from "../services/LayoutAdd";
 import axiosInstance from "../services/axios";
 import Button from "../services/Button";
 
+
 interface User {
   id: string;
   name: string;
@@ -37,6 +38,11 @@ const AddTask: React.FC = () => {
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
+    if (!name || !contents || !creator_id || !due_date || !status || !priority) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
     e.preventDefault();
     const newTask = {
       name,
