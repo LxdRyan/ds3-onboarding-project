@@ -1,3 +1,6 @@
+# Instructions
+Run `docker-compose up --build`
+
 # Project Description: Collaborative To-Do List Web App
 
 The goal is to create a web application that allows users to manage a shared to-do list. The app should enable adding, viewing, updating, and deleting tasks, with the data persisting across sessions. The project must be managed using Git for version control and Docker for containerization.
@@ -119,7 +122,7 @@ Each tier builds upon the previous one, creating a clear path to follow.
 - [x] Implement task completion toggling and deletion
 - [ ] Create feature branches for different components/functionality
 - [x] Set up Docker Compose to run all components together
-- [ ] Update README with basic setup instructions
+- [x] Update README with basic setup instructions
 
 **Victory Condition**: Demonstrate a functional to-do app with all components working together, where tasks persist between page refreshes.
 
@@ -127,11 +130,11 @@ Each tier builds upon the previous one, creating a clear path to follow.
 **Mission**: Polish the application and demonstrate effective teamwork across components.
 
 **Checkpoints**:
-- [ ] Implement a clean, intuitive UI with proper styling
+- [x] Implement a clean, intuitive UI with proper styling
 - [ ] Add task filtering (All, Active, Completed) in the frontend
-- [ ] Enhance the backend with proper error handling and validation
+- [x] Enhance the backend with proper error handling and validation
 - [x] Upgrade to a more robust database solution if using a simple file
-- [ ] Ensure data persistence is robust (survives container restarts)
+- [x] Ensure data persistence is robust (survives container restarts)
 - [x] Establish a proper Git workflow with meaningful commit messages
 - [x] Optimize Docker configuration (appropriate base images, port mapping)
 - [x] Each team member contributes to different components
@@ -149,7 +152,7 @@ Each tier builds upon the previous one, creating a clear path to follow.
 - [ ] Implement bulk actions (delete completed, mark all as complete)
 - [ ] Add real-time updates between users (e.g., WebSockets)
 - [x] Implement proper API authentication/security
-- [ ] Optimize Docker for production (multi-stage builds, environment variables)
+- [x] Optimize Docker for production (multi-stage builds, environment variables)
 - [ ] Add automated tests for frontend and backend components
 - [ ] Implement database migrations or schema versioning
 
