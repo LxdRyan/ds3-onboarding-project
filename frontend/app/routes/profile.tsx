@@ -34,10 +34,10 @@ const Profile: React.FC = () => {
 
   const handleUpdate = async () => {
     try {
-      const updatedProfile = { username };
+      const updatedProfile = { name };
 
       await axiosInstance.put(`/users/${userId}`, updatedProfile);
-      alert("Username updated successfully");
+      alert("Display name updated successfully");
       navigate("/home");
     } catch (error) {
       console.error("Failed to update profile:", error);
@@ -69,8 +69,8 @@ const Profile: React.FC = () => {
                 id="name"
                 className="input100"
                 type="text"
-                value={name}
-                placeholder="Name"
+                value={username}
+                placeholder="Username"
                 readOnly
               />
               <span className="focus-input100"></span>
@@ -78,16 +78,16 @@ const Profile: React.FC = () => {
             <label htmlFor="username">Username:</label>
             <div
               className="wrap-input100 validate-input"
-              data-validate="Username is required"
+              data-validate="Name is required"
             >
 
               <input
                 id="username"
                 className="input100"
                 type="text"
-                value={username}
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
+                value={name}
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
                 required
               />
               <span className="focus-input100"></span>
@@ -99,7 +99,7 @@ const Profile: React.FC = () => {
                 onClick={handleUpdate}
                 className="login100-form-btn"
               >
-                Update Username
+                Update Display Name
               </button>
             </div>
 

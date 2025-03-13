@@ -11,7 +11,7 @@ interface Task {
   name: string;
   contents: string;
   priority: string; // High, Medium, or Low
-  owner: string;
+  creator_id: number;
   dueDate: string;
   status: string; // e.g., "Completed", "In Progress"
 }
@@ -116,12 +116,12 @@ const Home: React.FC = () => {
   const handleStatusChange = async (task: Task, newStatus: string) => {
     const updatedTask: Task = {
       id: task.id,
-      contents: task.contents,
       name: task.name,
+      contents: task.contents,
+      creator_id: task.creator_id,
       dueDate: task.dueDate,
       status: newStatus,
       priority: task.priority,
-      owner: task.owner,
     };
 
     await handleUpdate(task.id, updatedTask);

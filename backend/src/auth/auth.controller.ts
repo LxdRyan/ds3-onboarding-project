@@ -28,7 +28,6 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Get('profile')
   async profile(@Request() req: ExpressRequest) {
-    console.log(req.user)
     if (req.user && 'sub' in req.user) {
       return {
         success: true,

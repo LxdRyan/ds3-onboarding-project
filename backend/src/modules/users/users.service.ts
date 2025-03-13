@@ -100,7 +100,6 @@ export class UsersService implements OnModuleInit {
     };
   }
 
-
   async deleteUser(id: number): Promise<UserDTO> {
     const user = await this.userRepository.findOne({ where: { id } });
 
