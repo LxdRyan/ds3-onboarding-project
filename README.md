@@ -1,6 +1,3 @@
-# Instructions
-Run `docker-compose up --build`
-
 # Project Description: Collaborative To-Do List Web App
 
 The goal is to create a web application that allows users to manage a shared to-do list. The app should enable adding, viewing, updating, and deleting tasks, with the data persisting across sessions. The project must be managed using Git for version control and Docker for containerization.
@@ -8,6 +5,12 @@ The goal is to create a web application that allows users to manage a shared to-
 example to take inspiration from:
 
 ![image](images/example.png)
+
+## Instructions
+1. Clone the repository
+2. Run `docker-compose up --build`
+3. The application will be available at `http://localhost:3000`
+4. A test user with username `test` and password `test` is available for testing purposes
 
 ## Application Architecture
 
