@@ -55,16 +55,15 @@ const Profile: React.FC = () => {
       alert("Failed to delete account");
     }
   };
-
+  
   return (
     <div className="limiter">
       <div className="container-login100">
         <div className="wrap-login100">
           <form className="add100-form validate-form">
             <span className="login100-form-title">Profile</span>
-            <label htmlFor="name">Name:</label>
+            <label htmlFor="username">Username:</label>
             <div className="wrap-input100">
-
               <input
                 id="name"
                 className="input100"
@@ -75,12 +74,11 @@ const Profile: React.FC = () => {
               />
               <span className="focus-input100"></span>
             </div>
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="name">Name:</label>
             <div
               className="wrap-input100 validate-input"
               data-validate="Name is required"
             >
-
               <input
                 id="username"
                 className="input100"

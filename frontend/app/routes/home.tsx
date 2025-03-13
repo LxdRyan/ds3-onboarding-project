@@ -109,6 +109,7 @@ const Home: React.FC = () => {
     };
 
     await handleUpdate(task.id, updatedTask);
+    window.location.reload();
   };
 
   const handleIndicator = (status: string) => {
