@@ -4,6 +4,8 @@ import axiosInstance from "~/services/axios";
 import { Container, Row, Col, Navbar, Nav, Dropdown, Button } from "react-bootstrap";
 import "./home.css"; // Custom styles if needed
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./css/util.css";
+import "./css/main.css";
 
 // Define the Task interface
 interface Task {
@@ -12,15 +14,45 @@ interface Task {
   contents: string;
   priority: string; // High, Medium, or Low
   creator_id: number;
-  dueDate: string;
+  due_date: string;
+  status: string; // e.g., "Completed", "In Progress"
+}
+
+interface UpdateTask {
+  name: string;
+  contents: string;
+  priority: string; // High, Medium, or Low
+  creator_id: number;
+  due_date: string;
+  status: string; // e.g., "Completed", "In Progress"
+}
+
+interface DisplayTask {
+  id: number;
+  name: string;
+  contents: string;
+  priority: string; // High, Medium, or Low
+  creator_id: number;
+  creator_name: string;
+  due_date: string;
   status: string; // e.g., "Completed", "In Progress"
 }
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  
   // Explicitly type the state as Task[]
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<DisplayTask[]>([]);
+  const [user, setUser] = useState("");
+
+  const fetchUsers = async (id: number) => {
+    try{
+      const usersResponse = await axiosInstance.get(`/users/${id}`)
+      return(usersResponse.data.contents.name)
+    } catch (error) {
+      console.error("Failed to get users", error)
+      return ""
+    }
+  }
 
   useEffect(() => {
     // Fetch tasks from API
@@ -28,28 +60,23 @@ const Home: React.FC = () => {
       try {
         const response = await axiosInstance.get('/tasks'); 
         console.log(response); // Ensure the response is typed
-        setTasks(response.data.contents);
+
+        const tasksWithCreators = await Promise.all(
+          response.data.contents.map(async (task: Task): Promise<DisplayTask> => {
+            return {
+              ...task,
+              creator_name: await fetchUsers(task.creator_id),
+            };
+          })
+        );
+
+        setTasks(tasksWithCreators);
       } catch (error) {
         console.error('Failed to fetch tasks:', error);
       }
     };
     fetchTasks();
   }, []);
-
-  const [user, setUser] = useState("");
-
-  const fetchUsers = async (id: number) => {
-    try{
-      const usersResponse = await axiosInstance.get(`/users/${id}`)
-      setUser = usersResponse.data.contents.username
-      console.log(usersResponse.data.contents.username)
-      // return(usersResponse.data.contents.username)
-    } catch (error) {
-      console.log("whoops")
-      console.error("Failed to get users", error)
-    }
-  }
-
 
   // const getUsername = (id:number) =>{
   //   // const [user, setUser] = useState("");
@@ -100,7 +127,7 @@ const Home: React.FC = () => {
     navigate(`/task/${taskId}`);
   };
 
-  const handleUpdate = async (taskId: number, updatedTask: Task) => {
+  const handleUpdate = async (taskId: number, updatedTask: UpdateTask) => {
     try {
       console.log("updating");
       console.log(updatedTask);
@@ -114,12 +141,11 @@ const Home: React.FC = () => {
   };
 
   const handleStatusChange = async (task: Task, newStatus: string) => {
-    const updatedTask: Task = {
-      id: task.id,
+    const updatedTask: UpdateTask = {
       name: task.name,
       contents: task.contents,
       creator_id: task.creator_id,
-      dueDate: task.dueDate,
+      due_date: task.due_date,
       status: newStatus,
       priority: task.priority,
     };
@@ -155,16 +181,13 @@ const Home: React.FC = () => {
           xs={3}
           className="task-title"
           style={{ cursor: "pointer" }}
-          onClick={() => 
-            //fetchUsers(task.creator_id)}
-            // console.log(task)}
+          onClick={() =>
             handleTaskClick(task.id)}
         >
           <strong>{task.name}</strong>
         </Col>
-        <Col xs={2}>{task.creator_id}</Col>
-        {/* <Col xs={2} >{fetchUsers(task.creator_id)}</Col> */}
-        <Col xs={2}>{(task.due_date.split("T"))[0]}</Col>
+        <Col xs={2}>Creator: {task.creator_name}</Col>
+        <Col xs={2}>Due: {(task.due_date.split("T"))[0]}</Col>
         <Col xs={2}>
           <Dropdown>
             <Dropdown.Toggle variant="secondary" size="sm">
