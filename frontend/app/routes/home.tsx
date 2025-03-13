@@ -42,7 +42,6 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   // Explicitly type the state as Task[]
   const [tasks, setTasks] = useState<DisplayTask[]>([]);
-  const [user, setUser] = useState("");
 
   const fetchUsers = async (id: number) => {
     try{
@@ -77,47 +76,6 @@ const Home: React.FC = () => {
     };
     fetchTasks();
   }, []);
-
-  // const getUsername = (id:number) =>{
-  //   // const [user, setUser] = useState("");
-  //   useEffect(() => {
-  //     const fetchUsers = async (id: number) => {
-  //       try{
-  //         setUser = await axiosInstance.get(`/users/${id}`);
-  //         console.log(user);
-  //       } catch (error) {
-  //         console.log("whoops");
-  //         console.error("Failed to get users", error);
-  //       }
-  //     }
-  //     fetchUsers(id);
-  //   }, []);
-  //   console.log(user);
-  //   const usernameOut = user;
-  //   return usernameOut;
-  // }
-  // const getUsername = (id: number) => {
-  //   const [user, setUser] = useState("");
-    // useEffect(() => {
-    //   const fetchUsers = async (id: number) => {
-    //     try{
-    //       setUser = await axiosInstance.get(`/users/${id}`);
-    //       console.log(usersResponse);
-    //     } catch (error) {
-    //       console.log("whoops");
-    //       console.error("Failed to get users", error);
-    //     }
-    //   }
-    //   fetchUsers(id);
-    // }, []);
-
-  //   // const responseUsers2 = fetchUsers(id)
-  //   const usernameOut = usersResponse
-  //   console.log("yeet?")
-  //   console.log(usernameOut)
-  //   return (usernameOut)
-  
-  // }
 
   const handleNavigation = (path: string) => {
     navigate(path);
