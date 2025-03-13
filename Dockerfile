@@ -16,4 +16,5 @@ COPY backend ./backend
 
 EXPOSE ${BACKEND_PORT} ${FRONTEND_PORT}
 
-CMD ["npm", "--prefix", "backend", "run", "start:dev"]
+# CMD ["npm", "--prefix", "backend", "run", "start:dev"]
+CMD ["npm", "--prefix", "backend", "run", "start"]
